@@ -1,53 +1,42 @@
 import { User } from "../models/User";
 import { store } from "../stores/store";
 import { setUser } from "../stores/userSlice";
+import api from "../interceptors/axiosInterceptor";
 
 class SecurityService extends EventTarget {
     keySession: string;
     API_URL: string;
     user: User;
-    theAuthProvider:any;
+    theAuthProvider: any;
+
     constructor() {
         super();
-
         this.keySession = 'session';
-        this.API_URL = import.meta.env.VITE_API_URL || ""; // Reemplaza con la URL real
+        this.API_URL = import.meta.env.VITE_API_URL || "";
         const storedUser = localStorage.getItem("user");
-        if (storedUser) {
-            this.user = JSON.parse(storedUser);
-        } else {
-            this.user = {}
-        }
+        this.user = storedUser ? JSON.parse(storedUser) : {};
     }
 
     async login(user: User) {
-        console.log("llamando api " + `${this.API_URL}/login`)
+        console.log("llamando api " + `${this.API_URL}/login`);
         try {
+            const response = await api.post("/login", user);
+            const data = response.data;
 
-            const response = await fetch(`${this.API_URL}/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(user),
-            });
-
-            if (!response.ok) {
-                throw new Error('Login failed');
-            }
-
-            const data = await response.json(); //Aquí recibe todo lo del usuario
             localStorage.setItem("user", JSON.stringify(data));
             store.dispatch(setUser(data));
+
             return data;
         } catch (error) {
-            console.error('Error during login:', error);
+            console.error("Error durante login:", error);
             throw error;
         }
     }
+
     getUser() {
         return this.user;
     }
+
     logout() {
         this.user = {};
         localStorage.removeItem("user");

@@ -1,61 +1,69 @@
+// TablaGenerica.tsx
 import React from "react";
 
-type Accion = {
-  nombre: string;
-  etiqueta: string;
-  icono?: JSX.Element;
-};
-
-type TablaGenericaProps<T> = {
+interface TablaGenericaProps<T> {
   datos: T[];
-  columnas: string[];
-  acciones: Accion[];
+  columnas: (keyof T)[];
+  formateadores?: {
+    [K in keyof T]?: (value: T[K]) => React.ReactNode;
+  };
+  acciones: {
+    nombre: string;
+    etiqueta: string;
+    icono: React.ReactNode;
+  }[];
   onAccion: (accion: string, item: T) => void;
-};
+}
 
-const TablaGenerica = <T,>({ datos, columnas, acciones, onAccion }: TablaGenericaProps<T>) => {
+const TablaGenerica = <T,>({
+  datos,
+  columnas,
+  formateadores = {},
+  acciones,
+  onAccion,
+}: TablaGenericaProps<T>) => {
   return (
-    <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-      <div className="border-b border-stroke px-6.5 py-4 dark:border-strokedark">
-        <h3 className="font-medium text-black dark:text-white">Listado</h3>
-      </div>
-      <div className="overflow-x-auto p-6.5">
-        <table className="w-full text-sm text-left text-gray-500">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50">
-            <tr>
-              {columnas.map((col) => (
-                <th key={col} className="px-6 py-3">{col}</th>
-              ))}
-              <th className="px-6 py-3">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {datos.map((item, index) => (
-              <tr
-                key={index}
-                className="odd:bg-white even:bg-gray-50 border-b dark:border-gray-700"
-              >
-                {columnas.map((col) => (
-                  <td key={col} className="px-6 py-4 text-gray-900 dark:text-white">
-                    {item[col as keyof T] as string | number | JSX.Element}
+    <div className="overflow-x-auto">
+      <table className="min-w-full bg-white">
+        <thead>
+          <tr>
+            {columnas.map((columna) => (
+              <th key={String(columna)} className="py-2 px-4 border-b">
+                {String(columna)}
+              </th>
+            ))}
+            {acciones.length > 0 && <th className="py-2 px-4 border-b">Acciones</th>}
+          </tr>
+        </thead>
+        <tbody>
+          {datos.map((item, index) => (
+            <tr key={index} className="hover:bg-gray-50">
+              {columnas.map((columna) => {
+                const value = item[columna];
+                const formateador = formateadores[columna as keyof typeof formateadores];
+                return (
+                  <td key={String(columna)} className="py-2 px-4 border-b">
+                    {formateador ? formateador(value) : String(value)}
                   </td>
-                ))}
-                <td className="px-6 py-4 space-x-2">
+                );
+              })}
+              {acciones.length > 0 && (
+                <td className="py-2 px-4 border-b space-x-2">
                   {acciones.map((accion) => (
                     <button
                       key={accion.nombre}
                       onClick={() => onAccion(accion.nombre, item)}
-                      className="text-blue-600 dark:text-blue-500 hover:underline"
+                      className="text-blue-500 hover:text-blue-700"
                     >
-                      {accion.icono || accion.etiqueta}
+                      {accion.icono}
                     </button>
                   ))}
                 </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

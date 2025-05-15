@@ -1,98 +1,69 @@
-import React, { useState, useEffect } from 'react';
-import TablaGenerica from '../TablaGenerica';
+import React, { useState, useEffect } from "react";
+import TablaGenerica from "../TablaGenerica";
+import { Edit, Trash2 } from "lucide-react";
+import { getRoles, deleteRole } from "../../services/roleService";
+import { Role } from "../../models/Role";
 
-/*import { Eye, Edit, Trash2 } from 'lucide-react';
-import { getRoles, deleteRole } from '../../services/roleService';
-import Swal from 'sweetalert2';
-import { Role } from '../../models/Role';
-
-/*const ListRoles = () => {
-  const [data, setData] = useState<Role[]>([]);
+const ListRoles: React.FC = () => {
+  const [roles, setRoles] = useState<Role[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchData();
+    const loadRoles = async () => {
+      try {
+        const data = await getRoles();
+        setRoles(data);
+      } catch (error) {
+        console.error("Error cargando roles:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadRoles();
   }, []);
 
-  const fetchData = async () => {
-    const roles = await getRoles();
-    setData(roles);
-  };
-
-  // Funciones para manejar las acciones
-  const handleView = (id: number) => {
-    console.log(`Ver registro con ID: ${id}`);
-  };
-
-  const handleEdit = (id: number) => {
-    console.log(`Editar registro con ID: ${id}`);
-
-    // Lógica para editar el registro
-  };
-
-  const handleDelete = async (id: number) => {
-    console.log(`Intentando eliminar usuario con ID: ${id}`);
-    Swal.fire({
-      title: 'Eliminación',
-      text: 'Está seguro de querer eliminar el registro?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar',
-      cancelButtonText: 'No',
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        const success = await deleteRole(id);
-        if (success) {
-          Swal.fire({
-            title: 'Eliminado',
-            text: 'El registro se ha eliminado',
-            icon: 'success',
-          });
+  const handleAction = async (action: string, item: Role) => {
+    if (action === "edit") {
+      console.log("Editar rol:", item);
+      // Lógica para editar
+    } else if (action === "delete") {
+      if (window.confirm(`¿Eliminar el rol "${item.nombre}"?`)) {
+        try {
+          if (item.id) {
+            await deleteRole(item.id);
+            setRoles(roles.filter(r => r.id !== item.id));
+          }
+        } catch (error) {
+          console.error("Error eliminando rol:", error);
         }
-        // 🔹 Vuelve a obtener los usuarios después de eliminar uno
-        fetchData();
       }
-    });
-  };
-};*/
-
-interface Rol {
-  id: number;
-  nombre: string;
-}
-
-const Roles: React.FC = () => {
-  const [roles, setRoles] = useState<Rol[]>([
-    { id: 1, nombre: 'Admin' },
-    { id: 2, nombre: 'Usuario' },
-  ]);
-  //console.log(API);
-
-  const manejarAccion = (accion: string, item: Rol) => {
-    if (accion === 'asignarPermisos') {
-      console.log('Asignar permisos al rol:', item);
     }
   };
 
+  if (loading) return <div>Cargando roles...</div>;
+
   return (
     <div className="p-6">
-      <h2 className="text-lg font-semibold text-gray-700 dark:text-white mb-4">
-        Lista de Roles
-      </h2>
-      <TablaGenerica
+      <h2 className="text-lg font-semibold text-gray-700 mb-4">Lista de Roles</h2>
+      <TablaGenerica<Role>
         datos={roles}
-        columnas={['id', 'nombre']}
+        columnas={["nombre"]}
         acciones={[
           {
-            nombre: 'asignarPermisos',
-            etiqueta: 'Asignar Permisos',
+            nombre: "edit",
+            etiqueta: "Editar",
+            icono: <Edit size={18} className="text-blue-600" />,
+          },
+          {
+            nombre: "delete",
+            etiqueta: "Eliminar",
+            icono: <Trash2 size={18} className="text-red-600" />,
           },
         ]}
-        onAccion={manejarAccion}
+        onAccion={handleAction}
       />
     </div>
   );
 };
 
-export default Roles;
+export default ListRoles;

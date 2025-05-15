@@ -1,113 +1,70 @@
+import React from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { Role } from "../../models/Role";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 
+// Esquema de validación
+const schema = yup.object().shape({
+  nombre: yup
+    .string()
+    .required("El nombre del rol es obligatorio")
+    .max(50, "El nombre no puede exceder los 50 caracteres")
+    .default(""), // Asegura un valor por defecto
+});
 
-// Definimos la interfaz para los props
-interface MyFormProps {
-    mode: number; // Puede ser 1 (crear) o 2 (actualizar)
-    handleCreate?: (values: Role) => void;
-    handleUpdate?: (values: Role) => void;
-    Role?: Role | null;
+interface Props {
+  initialData?: Role;
+  onSubmit: (data: Omit<Role, "id">) => void;
 }
 
+const RoleFormValidator: React.FC<Props> = ({ initialData, onSubmit }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<Omit<Role, "id">>({
+    resolver: yupResolver(schema),
+    defaultValues: initialData || {
+      nombre: "", // Asegura que 'nombre' sea un string por defecto
+    },
+  });
 
+  // Resetear formulario si initialData cambia
+  React.useEffect(() => {
+    if (initialData) {
+      reset(initialData);
+    }
+  }, [initialData, reset]);
 
-const RoleFormValidator: React.FC<MyFormProps> = ({ mode, handleCreate, handleUpdate,Role }) => {
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          Nombre del Rol
+        </label>
+        <input
+          type="text"
+          {...register("nombre")}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-2 border focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Ej: Administrador"
+        />
+        {errors.nombre && (
+          <p className="mt-1 text-sm text-red-600">{errors.nombre.message}</p>
+        )}
+      </div>
 
-    const handleSubmit = (formattedValues: Role) => {
-        if (mode === 1 && handleCreate) {
-            handleCreate(formattedValues);  // Si `handleCreate` está definido, lo llamamos
-        } else if (mode === 2 && handleUpdate) {
-            handleUpdate(formattedValues);  // Si `handleUpdate` está definido, lo llamamos
-        } else {
-            console.error('No function provided for the current mode');
-        }
-    };
-
-    return (
-        <Formik
-            initialValues={Role ? Role :{
-                name: "",
-                email: "",
-                age: "",
-                city: "",
-                phone: "",
-                is_active: false,
-            }}
-            validationSchema={Yup.object({
-                name: Yup.string().required("El nombre es obligatorio"),
-                email: Yup.string().email("Email inválido").required("El email es obligatorio"),
-                age: Yup.number()
-                    .typeError("Debe ser un número")
-                    .positive("Debe ser un número positivo")
-                    .integer("Debe ser un número entero")
-                    .required("La edad es obligatoria"),
-                city: Yup.string().required("La ciudad es obligatoria"),
-                phone: Yup.string()
-                    .matches(/^\d{10}$/, "El teléfono debe tener 10 dígitos")
-                    .required("El teléfono es obligatorio"),
-            })}
-            onSubmit={(values) => {
-                const formattedValues = { ...values, age: Number(values.age) };  // Formateo adicional si es necesario
-                handleSubmit(formattedValues);
-            }}
-            
+      <div className="pt-4">
+        <button
+          type="submit"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md shadow-sm transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         >
-            {({ handleSubmit }) => (
-                <Form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 p-6 bg-white rounded-md shadow-md">
-                    {/* Nombre */}
-                    <div>
-                        <label htmlFor="name" className="block text-lg font-medium text-gray-700">Name</label>
-                        <Field type="text" name="name" className="w-full border rounded-md p-2" />
-                        <ErrorMessage name="name" component="p" className="text-red-500 text-sm" />
-                    </div>
-
-                    {/* Email */}
-                    <div>
-                        <label htmlFor="email" className="block text-lg font-medium text-gray-700">Email</label>
-                        <Field type="email" name="email" className="w-full border rounded-md p-2" />
-                        <ErrorMessage name="email" component="p" className="text-red-500 text-sm" />
-                    </div>
-
-                    {/* Edad */}
-                    <div>
-                        <label htmlFor="age" className="block text-lg font-medium text-gray-700">Age</label>
-                        <Field type="number" name="age" className="w-full border rounded-md p-2" />
-                        <ErrorMessage name="age" component="p" className="text-red-500 text-sm" />
-                    </div>
-
-                    {/* Ciudad */}
-                    <div>
-                        <label htmlFor="city" className="block text-lg font-medium text-gray-700">City</label>
-                        <Field type="text" name="city" className="w-full border rounded-md p-2" />
-                        <ErrorMessage name="city" component="p" className="text-red-500 text-sm" />
-                    </div>
-
-                    {/* Teléfono */}
-                    <div>
-                        <label htmlFor="phone" className="block text-lg font-medium text-gray-700">Phone</label>
-                        <Field type="text" name="phone" className="w-full border rounded-md p-2" />
-                        <ErrorMessage name="phone" component="p" className="text-red-500 text-sm" />
-                    </div>
-
-                    {/* Activar */}
-                    <div className="flex items-center">
-                        <Field type="checkbox" name="is_active" className="mr-2" />
-                        <label htmlFor="is_active" className="text-lg font-medium text-gray-700">Active</label>
-                    </div>
-
-                    {/* Botón de enviar */}
-                    <button
-                        type="submit"
-                        className={`py-2 px-4 text-white rounded-md bg-black-2 w-fit ${mode === 1 ? "bg-blue-500 hover:bg-blue-600" : "bg-green-500 hover:bg-green-600"}`}
-                    >
-                        {mode === 1 ? "Crear" : "Actualizar"}
-                    </button>
-                </Form>
-            )}
-        </Formik>
-    );
+          {initialData ? "Actualizar Rol" : "Crear Rol"}
+        </button>
+      </div>
+    </form>
+  );
 };
 
 export default RoleFormValidator;
