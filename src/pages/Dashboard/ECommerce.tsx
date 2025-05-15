@@ -1,35 +1,33 @@
-import CardFour from '../../components/CardFour.tsx';
-import CardOne from '../../components/CardOne.tsx';
-import CardThree from '../../components/CardThree.tsx';
-import CardTwo from '../../components/CardTwo.tsx';
-import ChartOne from '../../components/ChartOne.tsx';
-import ChartThree from '../../components/ChartThree.tsx';
-import ChartTwo from '../../components/ChartTwo.tsx';
-import ChatCard from '../../components/ChatCard.tsx';
-import MapOne from '../../components/MapOne.tsx';
-import TableOne from '../../components/TableOne.tsx';
-
 const ECommerce = () => {
-  return (
-    <>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-        <CardOne />
-        <CardTwo />
-        <CardThree />
-        <CardFour />
-      </div>
+  const user = JSON.parse(localStorage.getItem('user') || 'null');
 
-      <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-        <ChartOne />
-        <ChartTwo />
-        <ChartThree />
-        <MapOne />
-        <div className="col-span-12 xl:col-span-8">
-          <TableOne />
+  const isAuthenticated = user && user.token;
+
+  return (
+    <div className="p-4 bg-white rounded shadow">
+      {!isAuthenticated ? (
+        <div className="text-center">
+          <h2 className="text-xl font-semibold mb-2">¡Bienvenido!</h2>
+          <p className="mb-4">Inicia sesión para ver contenido personalizado.</p>
+          <button
+            onClick={() => window.location.href = '/auth/signin'}
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          >
+            Iniciar sesión
+          </button>
         </div>
-        <ChatCard />
-      </div>
-    </>
+      ) : (
+        <div>
+          <h2 className="text-xl font-semibold mb-4">Hola {user.name}</h2>
+          <p>Estos son tus últimos restaurantes visitados:</p>
+          <ul className="list-disc list-inside mt-2">
+            <li>Restaurante El Corral</li>
+            <li>Crepes & Waffles</li>
+            <li>Andrés Carne de Res</li>
+          </ul>
+        </div>
+      )}
+    </div>
   );
 };
 
