@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar2';
 import { Outlet } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from '../stores/store';
+import Footer from "../components/Footer"
 const DefaultLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -28,6 +29,9 @@ const DefaultLayout = () => {
                 <Outlet />
               </div>
             </main>
+            <footer>
+              <Footer/>
+            </footer>
             {/* <!-- ===== Main Content End ===== --> */}
           </div>
           {/* <!-- ===== Content Area End ===== --> */}

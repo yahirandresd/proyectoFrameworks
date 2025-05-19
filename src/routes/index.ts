@@ -18,8 +18,14 @@ const UpdateRole= lazy(() => import('../pages/Roles/Update'))
 const ListUsuarios= lazy(() => import('../pages/Users/PageUsuarios'))
 const ListRoles= lazy(() => import('../pages/Roles/RolesPage'))
 const ListPermisos= lazy(() => import('../pages/Permisos/PermisosPage'))
+const ListRestaurants = lazy(() => import('../components/Address/ListAddress'))
 
 const coreRoutes = [
+  {
+    path: '/list-restaurants',
+    title: 'Restaurantes',
+    component: ListRestaurants,
+  },
   {
     path: '/update-role/:id',
     title: 'UpdateUser',

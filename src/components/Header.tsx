@@ -5,11 +5,14 @@ import DropdownMessage from './DropdownMessage';
 import DropdownNotification from './DropdownNotification';
 import DropdownUser from './DropdownUser';
 import Navbar from './Navbar';
+import { useSelector } from 'react-redux';
+import { RootState } from '../stores/store';
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
   setSidebarOpen: (arg0: boolean) => void;
 }) => {
+  const user = useSelector((state: RootState) => state.user.user);
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
       <div className="flex flex-grow items-center justify-between py-4 px-4 shadow-2 md:px-6 2xl:px-11">
@@ -62,38 +65,53 @@ const Header = (props: {
           </Link>
         </div>
 
-        <div className="hidden sm:block bg-meta-6 p-4 rounded-full dark:bg-meta-9">
-          <form action="https://formbold.com/s/unique_form_id" method="POST">
+        <div className="hidden sm:block p-4 rounded-full  w-full">
+          <form
+            className="max-w-md mx-auto"
+            action="https://formbold.com/s/unique_form_id"
+            method="POST"
+          >
+            <label
+              htmlFor="default-search"
+              className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+            >
+              Search
+            </label>
             <div className="relative">
-              <button className="absolute top-1/2 left-0 -translate-y-1/2">
+              <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg
-                  className="fill-body hover:fill-primary dark:fill-bodydark dark:hover:fill-primary"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
+                  className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                  aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 20"
                 >
                   <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M9.16666 3.33332C5.945 3.33332 3.33332 5.945 3.33332 9.16666C3.33332 12.3883 5.945 15 9.16666 15C12.3883 15 15 12.3883 15 9.16666C15 5.945 12.3883 3.33332 9.16666 3.33332ZM1.66666 9.16666C1.66666 5.02452 5.02452 1.66666 9.16666 1.66666C13.3088 1.66666 16.6667 5.02452 16.6667 9.16666C16.6667 13.3088 13.3088 16.6667 9.16666 16.6667C5.02452 16.6667 1.66666 13.3088 1.66666 9.16666Z"
-                    fill=""
-                  />
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M13.2857 13.2857C13.6112 12.9603 14.1388 12.9603 14.4642 13.2857L18.0892 16.9107C18.4147 17.2362 18.4147 17.7638 18.0892 18.0892C17.7638 18.4147 17.2362 18.4147 16.9107 18.0892L13.2857 14.4642C12.9603 14.1388 12.9603 13.6112 13.2857 13.2857Z"
-                    fill=""
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                   />
                 </svg>
-              </button>
-
+              </div>
               <input
-                type="text"
-                placeholder="Type to search..."
-                className="w-full bg-transparent pr-4 pl-9 focus:outline-none"
+                type="search"
+                id="default-search"
+                name="search"
+                placeholder="Search Mockups, Logos..."
+                required
+                className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 
+                 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               />
+              <button
+                type="submit"
+                className="text-white absolute end-2.5 bottom-2.5 bg-[#ffcb02] hover:bg-blue-800 focus:ring-4 
+                 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 
+                 dark:bg-blue dark:hover:bg-blue-700 dark:focus:ring-blue-800 dark:text-black-2"
+              >
+                Search
+              </button>
             </div>
           </form>
         </div>
@@ -103,14 +121,12 @@ const Header = (props: {
             {/* <!-- Dark Mode Toggler --> */}
             <DarkModeSwitcher />
             {/* <!-- Dark Mode Toggler --> */}
-
-            {/* <!-- Notification Menu Area --> */}
-            <DropdownNotification />
-            {/* <!-- Notification Menu Area --> */}
-            <Navbar/>
+            {/* <!-- Notification Menu Area --> */}{' '}
             {/* <!-- Chat Notification Area --> */}
-            <DropdownMessage />
-            {/* <!-- Chat Notification Area --> */}
+            {user && <DropdownNotification /> && <Navbar /> && (
+              <DropdownMessage />
+            )}
+            {/* <!-- Notification Menu Area --> */}
           </ul>
 
           {/* <!-- User Area --> */}

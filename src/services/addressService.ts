@@ -4,7 +4,7 @@ import { Address } from "../models/Address"; // Ensure the file "../models/Addre
 // Obtener todas las direcciones
 export const getAddresses = async (): Promise<Address[]> => {
     try {
-        const response = await api.get("/Addresses");
+        const response = await api.get("/addresses");
         return response.data;
     } catch (error) {
         console.error("Error al obtener direcciones", error);
@@ -15,7 +15,7 @@ export const getAddresses = async (): Promise<Address[]> => {
 // Obtener una dirección por ID
 export const getAddressById = async (id: number): Promise<Address | null> => {
     try {
-        const response = await api.get(`/Addresses/${id}`);
+        const response = await api.get(`/addresses/${id}`);
         return response.data;
     } catch (error) {
         console.error("Dirección no encontrada", error);
