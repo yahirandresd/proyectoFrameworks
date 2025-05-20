@@ -26,7 +26,7 @@ export const getAddressById = async (id: number): Promise<Address | null> => {
 // Crear una nueva dirección
 export const createAddress = async (address: Omit<Address, "id">): Promise<Address | null> => {
     try {
-        const response = await api.post("/Addresses", address);
+        const response = await api.post("/addresses", address);
         return response.data;
     } catch (error) {
         console.error("Error al crear dirección", error);
@@ -37,7 +37,7 @@ export const createAddress = async (address: Omit<Address, "id">): Promise<Addre
 // Actualizar dirección
 export const updateAddress = async (id: number, address: Partial<Address>): Promise<Address | null> => {
     try {
-        const response = await api.put(`/Addresses/${id}`, address);
+        const response = await api.put(`/addresses/${id}`, address);
         return response.data;
     } catch (error) {
         console.error("Error al actualizar dirección", error);
@@ -48,7 +48,7 @@ export const updateAddress = async (id: number, address: Partial<Address>): Prom
 // Eliminar dirección
 export const deleteAddress = async (id: number): Promise<boolean> => {
     try {
-        await api.delete(`/Addresses/${id}`);
+        await api.delete(`/addresses/${id}`);
         return true;
     } catch (error) {
         console.error("Error al eliminar dirección", error);

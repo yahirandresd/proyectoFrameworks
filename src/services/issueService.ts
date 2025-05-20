@@ -4,7 +4,7 @@ import { Issue } from "../models/Issue";
 // Obtener todos los issues
 export const getIssues = async (): Promise<Issue[]> => {
     try {
-        const response = await api.get("/Issues");
+        const response = await api.get("/issues");
         return response.data;
     } catch (error) {
         console.error("Error al obtener issues", error);
@@ -15,7 +15,7 @@ export const getIssues = async (): Promise<Issue[]> => {
 // Obtener un issue por ID
 export const getIssueById = async (id: number): Promise<Issue | null> => {
     try {
-        const response = await api.get(`/Issues/${id}`);
+        const response = await api.get(`/issues/${id}`);
         return response.data;
     } catch (error) {
         console.error("Issue no encontrado", error);
@@ -26,7 +26,7 @@ export const getIssueById = async (id: number): Promise<Issue | null> => {
 // Crear un nuevo issue
 export const createIssue = async (issue: Omit<Issue, "id">): Promise<Issue | null> => {
     try {
-        const response = await api.post("/Issues", issue);
+        const response = await api.post("/issues", issue);
         return response.data;
     } catch (error) {
         console.error("Error al crear issue", error);
@@ -37,7 +37,7 @@ export const createIssue = async (issue: Omit<Issue, "id">): Promise<Issue | nul
 // Actualizar issue
 export const updateIssue = async (id: number, issue: Partial<Issue>): Promise<Issue | null> => {
     try {
-        const response = await api.put(`/Issues/${id}`, issue);
+        const response = await api.put(`/issues/${id}`, issue);
         return response.data;
     } catch (error) {
         console.error("Error al actualizar issue", error);
@@ -48,7 +48,7 @@ export const updateIssue = async (id: number, issue: Partial<Issue>): Promise<Is
 // Eliminar issue
 export const deleteIssue = async (id: number): Promise<boolean> => {
     try {
-        await api.delete(`/Issues/${id}`);
+        await api.delete(`/issues/${id}`);
         return true;
     } catch (error) {
         console.error("Error al eliminar issue", error);

@@ -4,7 +4,7 @@ import { Shift } from "../models/Shift";  // Asumiendo que el modelo Shift está
 // Obtener todos los turnos
 export const getShifts = async (): Promise<Shift[]> => {
     try {
-        const response = await api.get("/Shifts");  // Endpoint para obtener todos los turnos
+        const response = await api.get("/shifts");  // Endpoint para obtener todos los turnos
         return response.data;
     } catch (error) {
         console.error("Error al obtener turnos", error);
@@ -15,7 +15,7 @@ export const getShifts = async (): Promise<Shift[]> => {
 // Obtener un turno por ID
 export const getShiftById = async (id: number): Promise<Shift | null> => {
     try {
-        const response = await api.get(`/Shifts/${id}`);
+        const response = await api.get(`/shifts/${id}`);
         return response.data;
     } catch (error) {
         console.error("Turno no encontrado", error);
@@ -26,7 +26,7 @@ export const getShiftById = async (id: number): Promise<Shift | null> => {
 // Crear un nuevo turno
 export const createShift = async (shift: Omit<Shift, "id">): Promise<Shift | null> => {
     try {
-        const response = await api.post("/Shifts", shift);
+        const response = await api.post("/shifts", shift);
         return response.data;
     } catch (error) {
         console.error("Error al crear turno", error);
@@ -37,7 +37,7 @@ export const createShift = async (shift: Omit<Shift, "id">): Promise<Shift | nul
 // Actualizar turno
 export const updateShift = async (id: number, shift: Partial<Shift>): Promise<Shift | null> => {
     try {
-        const response = await api.put(`/Shifts/${id}`, shift);
+        const response = await api.put(`/shifts/${id}`, shift);
         return response.data;
     } catch (error) {
         console.error("Error al actualizar turno", error);
@@ -48,7 +48,7 @@ export const updateShift = async (id: number, shift: Partial<Shift>): Promise<Sh
 // Eliminar turno
 export const deleteShift = async (id: number): Promise<boolean> => {
     try {
-        await api.delete(`/Shifts/${id}`);
+        await api.delete(`/shifts/${id}`);
         return true;
     } catch (error) {
         console.error("Error al eliminar turno", error);

@@ -4,7 +4,7 @@ import { Driver } from "../models/Driver";
 // Obtener todos los drivers
 export const getDrivers = async (): Promise<Driver[]> => {
     try {
-        const response = await api.get("/Drivers");
+        const response = await api.get("/drivers");
         return response.data;
     } catch (error) {
         console.error("Error al obtener drivers", error);
@@ -15,7 +15,7 @@ export const getDrivers = async (): Promise<Driver[]> => {
 // Obtener un driver por ID
 export const getDriverById = async (id: number): Promise<Driver | null> => {
     try {
-        const response = await api.get(`/Drivers/${id}`);
+        const response = await api.get(`/drivers/${id}`);
         return response.data;
     } catch (error) {
         console.error("Driver no encontrado", error);
@@ -26,7 +26,7 @@ export const getDriverById = async (id: number): Promise<Driver | null> => {
 // Crear un nuevo driver
 export const createDriver = async (driver: Omit<Driver, "id">): Promise<Driver | null> => {
     try {
-        const response = await api.post("/Drivers", driver);
+        const response = await api.post("/drivers", driver);
         return response.data;
     } catch (error) {
         console.error("Error al crear driver", error);
@@ -37,7 +37,7 @@ export const createDriver = async (driver: Omit<Driver, "id">): Promise<Driver |
 // Actualizar driver
 export const updateDriver = async (id: number, driver: Partial<Driver>): Promise<Driver | null> => {
     try {
-        const response = await api.put(`/Drivers/${id}`, driver);
+        const response = await api.put(`/drivers/${id}`, driver);
         return response.data;
     } catch (error) {
         console.error("Error al actualizar driver", error);
@@ -48,7 +48,7 @@ export const updateDriver = async (id: number, driver: Partial<Driver>): Promise
 // Eliminar driver
 export const deleteDriver = async (id: number): Promise<boolean> => {
     try {
-        await api.delete(`/Drivers/${id}`);
+        await api.delete(`/drivers/${id}`);
         return true;
     } catch (error) {
         console.error("Error al eliminar driver", error);

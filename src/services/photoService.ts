@@ -4,7 +4,7 @@ import { Photo } from "../models/Photo";
 // Obtener todas las fotos
 export const getPhotos = async (): Promise<Photo[]> => {
     try {
-        const response = await api.get("/Photos");
+        const response = await api.get("/photos");
         return response.data;
     } catch (error) {
         console.error("Error al obtener fotos", error);
@@ -15,7 +15,7 @@ export const getPhotos = async (): Promise<Photo[]> => {
 // Obtener una foto por ID
 export const getPhotoById = async (id: number): Promise<Photo | null> => {
     try {
-        const response = await api.get(`/Photos/${id}`);
+        const response = await api.get(`/photos/${id}`);
         return response.data;
     } catch (error) {
         console.error("Foto no encontrada", error);
@@ -26,7 +26,7 @@ export const getPhotoById = async (id: number): Promise<Photo | null> => {
 // Crear una nueva foto
 export const createPhoto = async (photo: Omit<Photo, "id">): Promise<Photo | null> => {
     try {
-        const response = await api.post("/Photos", photo);
+        const response = await api.post("/photos", photo);
         return response.data;
     } catch (error) {
         console.error("Error al crear foto", error);
@@ -37,7 +37,7 @@ export const createPhoto = async (photo: Omit<Photo, "id">): Promise<Photo | nul
 // Actualizar foto
 export const updatePhoto = async (id: number, photo: Partial<Photo>): Promise<Photo | null> => {
     try {
-        const response = await api.put(`/Photos/${id}`, photo);
+        const response = await api.put(`/photos/${id}`, photo);
         return response.data;
     } catch (error) {
         console.error("Error al actualizar foto", error);
@@ -48,7 +48,7 @@ export const updatePhoto = async (id: number, photo: Partial<Photo>): Promise<Ph
 // Eliminar foto
 export const deletePhoto = async (id: number): Promise<boolean> => {
     try {
-        await api.delete(`/Photos/${id}`);
+        await api.delete(`/photos/${id}`);
         return true;
     } catch (error) {
         console.error("Error al eliminar foto", error);

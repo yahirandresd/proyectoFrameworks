@@ -15,7 +15,7 @@ export const getMotorcycles = async (): Promise<Motorcycle[]> => {
 // Obtener una motocicleta por ID
 export const getMotorcycleById = async (id: number): Promise<Motorcycle | null> => {
     try {
-        const response = await api.get(`/Motorcycles/${id}`);
+        const response = await api.get(`/motorcycles/${id}`);
         return response.data;
     } catch (error) {
         console.error("Motocicleta no encontrada", error);
@@ -26,7 +26,7 @@ export const getMotorcycleById = async (id: number): Promise<Motorcycle | null> 
 // Crear una nueva motocicleta
 export const createMotorcycle = async (motorcycle: Omit<Motorcycle, "id">): Promise<Motorcycle | null> => {
     try {
-        const response = await api.post("/Motorcycles", motorcycle);
+        const response = await api.post("/motorcycles", motorcycle);
         return response.data;
     } catch (error) {
         console.error("Error al crear motocicleta", error);
@@ -37,7 +37,7 @@ export const createMotorcycle = async (motorcycle: Omit<Motorcycle, "id">): Prom
 // Actualizar motocicleta
 export const updateMotorcycle = async (id: number, motorcycle: Partial<Motorcycle>): Promise<Motorcycle | null> => {
     try {
-        const response = await api.put(`/Motorcycles/${id}`, motorcycle);
+        const response = await api.put(`/motorcycles/${id}`, motorcycle);
         return response.data;
     } catch (error) {
         console.error("Error al actualizar motocicleta", error);
@@ -48,7 +48,7 @@ export const updateMotorcycle = async (id: number, motorcycle: Partial<Motorcycl
 // Eliminar motocicleta
 export const deleteMotorcycle = async (id: number): Promise<boolean> => {
     try {
-        await api.delete(`/Motorcycles/${id}`);
+        await api.delete(`/motorcycles/${id}`);
         return true;
     } catch (error) {
         console.error("Error al eliminar motocicleta", error);

@@ -4,7 +4,7 @@ import { Customer } from "../models/Customer";
 // Obtener todos los clientes
 export const getCustomers = async (): Promise<Customer[]> => {
     try {
-        const response = await api.get("/Customers");
+        const response = await api.get("/customers");
         return response.data;
     } catch (error) {
         console.error("Error al obtener clientes", error);
@@ -15,7 +15,7 @@ export const getCustomers = async (): Promise<Customer[]> => {
 // Obtener un cliente por ID
 export const getCustomerById = async (id: number): Promise<Customer | null> => {
     try {
-        const response = await api.get(`/Customers/${id}`);
+        const response = await api.get(`/customers/${id}`);
         return response.data;
     } catch (error) {
         console.error("Cliente no encontrado", error);
@@ -26,7 +26,7 @@ export const getCustomerById = async (id: number): Promise<Customer | null> => {
 // Crear un nuevo cliente
 export const createCustomer = async (customer: Omit<Customer, "id">): Promise<Customer | null> => {
     try {
-        const response = await api.post("/Customers", customer);
+        const response = await api.post("/customers", customer);
         return response.data;
     } catch (error) {
         console.error("Error al crear cliente", error);
@@ -37,7 +37,7 @@ export const createCustomer = async (customer: Omit<Customer, "id">): Promise<Cu
 // Actualizar cliente
 export const updateCustomer = async (id: number, customer: Partial<Customer>): Promise<Customer | null> => {
     try {
-        const response = await api.put(`/Customers/${id}`, customer);
+        const response = await api.put(`/customers/${id}`, customer);
         return response.data;
     } catch (error) {
         console.error("Error al actualizar cliente", error);
@@ -48,7 +48,7 @@ export const updateCustomer = async (id: number, customer: Partial<Customer>): P
 // Eliminar cliente
 export const deleteCustomer = async (id: number): Promise<boolean> => {
     try {
-        await api.delete(`/Customers/${id}`);
+        await api.delete(`/customers/${id}`);
         return true;
     } catch (error) {
         console.error("Error al eliminar cliente", error);

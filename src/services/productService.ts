@@ -4,7 +4,7 @@ import { Product } from "../models/Product";
 // Obtener todos los productos
 export const getProducts = async (): Promise<Product[]> => {
     try {
-        const response = await api.get("/Products");
+        const response = await api.get("/products");
         return response.data;
     } catch (error) {
         console.error("Error al obtener productos", error);
@@ -15,7 +15,7 @@ export const getProducts = async (): Promise<Product[]> => {
 // Obtener un producto por ID
 export const getProductById = async (id: number): Promise<Product | null> => {
     try {
-        const response = await api.get(`/Products/${id}`);
+        const response = await api.get(`/products/${id}`);
         return response.data;
     } catch (error) {
         console.error("Producto no encontrado", error);
@@ -26,7 +26,7 @@ export const getProductById = async (id: number): Promise<Product | null> => {
 // Crear un nuevo producto
 export const createProduct = async (product: Omit<Product, "id">): Promise<Product | null> => {
     try {
-        const response = await api.post("/Products", product);
+        const response = await api.post("/products", product);
         return response.data;
     } catch (error) {
         console.error("Error al crear producto", error);
@@ -37,7 +37,7 @@ export const createProduct = async (product: Omit<Product, "id">): Promise<Produ
 // Actualizar producto
 export const updateProduct = async (id: number, product: Partial<Product>): Promise<Product | null> => {
     try {
-        const response = await api.put(`/Products/${id}`, product);
+        const response = await api.put(`/products/${id}`, product);
         return response.data;
     } catch (error) {
         console.error("Error al actualizar producto", error);
@@ -48,7 +48,7 @@ export const updateProduct = async (id: number, product: Partial<Product>): Prom
 // Eliminar producto
 export const deleteProduct = async (id: number): Promise<boolean> => {
     try {
-        await api.delete(`/Products/${id}`);
+        await api.delete(`/products/${id}`);
         return true;
     } catch (error) {
         console.error("Error al eliminar producto", error);

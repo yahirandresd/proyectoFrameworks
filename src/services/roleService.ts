@@ -4,7 +4,7 @@ import { Role } from "../models/Role";
 // Obtener todos los roles
 export const getRoles = async (): Promise<Role[]> => {
     try {
-        const response = await api.get("/Roles");
+        const response = await api.get("/roles");
         return response.data;
     } catch (error) {
         console.error("Error al obtener roles", error);
@@ -15,7 +15,7 @@ export const getRoles = async (): Promise<Role[]> => {
 // Obtener un rol por ID
 export const getRoleById = async (id: number): Promise<Role | null> => {
     try {
-        const response = await api.get(`/Roles/${id}`);
+        const response = await api.get(`/roles/${id}`);
         return response.data;
     } catch (error) {
         console.error("Rol no encontrado", error);
@@ -26,7 +26,7 @@ export const getRoleById = async (id: number): Promise<Role | null> => {
 // Crear un nuevo rol
 export const createRole = async (role: Omit<Role, "id">): Promise<Role | null> => {
     try {
-        const response = await api.post("/Roles", role);
+        const response = await api.post("/roles", role);
         return response.data;
     } catch (error) {
         console.error("Error al crear rol", error);
@@ -37,7 +37,7 @@ export const createRole = async (role: Omit<Role, "id">): Promise<Role | null> =
 // Actualizar rol
 export const updateRole = async (id: number, role: Partial<Role>): Promise<Role | null> => {
     try {
-        const response = await api.put(`/Roles/${id}`, role);
+        const response = await api.put(`/roles/${id}`, role);
         return response.data;
     } catch (error) {
         console.error("Error al actualizar rol", error);
@@ -48,7 +48,7 @@ export const updateRole = async (id: number, role: Partial<Role>): Promise<Role 
 // Eliminar rol
 export const deleteRole = async (id: number): Promise<boolean> => {
     try {
-        await api.delete(`/Roles/${id}`);
+        await api.delete(`/roles/${id}`);
         return true;
     } catch (error) {
         console.error("Error al eliminar rol", error);
