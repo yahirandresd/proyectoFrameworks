@@ -1,14 +1,4 @@
 import { lazy } from 'react';
-import ListAddresses from '../components/Address/ListAddress';
-import ListCustomers from '../components/Customers/ListCustomers';
-import ListDrivers from '../components/Drivers/ListDriver';
-import ListIssues from '../components/Issues/ListIssues';
-import ListMenu from '../components/Menu/ListMenu';
-import ListMotorcycles from '../components/Motorcycle/ListMotorcycle';
-import ListOrders from '../components/Order/ListOrder';
-import ListPhotos from '../components/Photos/ListPhotos';
-import ListProducts from '../components/Products/ListProducts';
-import ListShifts from '../components/Shifts/ListShifts';
 
 const Calendar = lazy(() => import('../pages/Calendar'));
 const Chart = lazy(() => import('../pages/Chart'));
@@ -26,7 +16,21 @@ const UpdateRole= lazy(() => import('../pages/Roles/Update'))
 /*Ejemplos Ejercicio*/
 const ListRoles= lazy(() => import('../pages/Roles/RolesPage'))
 const ListPermisos= lazy(() => import('../pages/Permisos/PermisosPage'))
-const ListRestaurants = lazy(() => import('../components/Address/ListAddress'))
+
+/*PROYECTO*/
+/*Listar*/
+const ListAddresses = lazy(() => import('../components/Address/ListAddress'));
+const ListCustomers = lazy(() => import('../components/Customers/ListCustomers'));
+const ListDrivers = lazy(() => import('../components/Drivers/ListDriver'));
+const ListIssues = lazy(() => import('../components/Issues/ListIssues'));
+const ListMenu = lazy(() => import('../components/Menu/ListMenu'));
+const ListMotorcycles = lazy(() => import('../components/Motorcycle/ListMotorcycle'));
+const ListOrders = lazy(() => import('../components/Order/ListOrder'));
+const ListPhotos = lazy(() => import('../components/Photos/ListPhotos'));
+const ListProducts = lazy(() => import('../components/Products/ListProducts'));
+const ListShifts = lazy(() => import('../components/Shifts/ListShifts'));
+const ListRestaurants = lazy(() => import('../components/Restaurants/ListRestaurants'));
+
 
 const coreRoutes = [
   {

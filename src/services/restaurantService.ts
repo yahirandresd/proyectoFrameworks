@@ -6,6 +6,7 @@ export const getRestaurants = async (): Promise<Restaurant[]> => {
     try {
         const response = await api.get("/restaurants");
         return response.data;
+        console.log(response.data)
     } catch (error) {
         console.error("Error fetching restaurants", error);
         return [];
