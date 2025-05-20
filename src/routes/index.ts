@@ -12,10 +12,6 @@ const Alerts = lazy(() => import('../pages/UiElements/Alerts'));
 const Buttons = lazy(() => import('../pages/UiElements/Buttons'));
 const CreateUser= lazy(() => import('../pages/Users/CreateUser'))
 const UpdateUser= lazy(() => import('../pages/Users/UpdateUsers'))
-const CreateRole= lazy(() => import('../pages/Roles/Create'))
-const UpdateRole= lazy(() => import('../pages/Roles/Update'))
-/*Ejemplos Ejercicio*/
-const ListRoles= lazy(() => import('../pages/Roles/RolesPage'))
 
 /*PROYECTO*/
 /*Listar*/
@@ -30,6 +26,26 @@ const ListPhotos = lazy(() => import('../components/Photos/ListPhotos'));
 const ListProducts = lazy(() => import('../components/Products/ListProducts'));
 const ListShifts = lazy(() => import('../components/Shifts/ListShifts'));
 const ListRestaurants = lazy(() => import('../components/Restaurants/ListRestaurants'));
+/*PROYECTO*/
+/*Crear*/
+const CreateAddress= lazy(() => import('../pages/Address/CreateAddress'))
+const CreateCustomer= lazy(()=> import ('../pages/Customers/CreateCustomer'))
+const CreateDriver= lazy(()=> import('../pages/Drivers/CreateDrivers'))
+const CreateIssue= lazy(()=> import('../pages/Issues/CreateIssue'))
+const CreateMenu= lazy(()=> import('../pages/Menu/CreateMenu'))
+const CreateMotorcycle= lazy(()=> import('../pages/Motorcycle/CreateMotorcycle'))
+
+
+
+
+/*PROYECTO*/
+/*Actualizar*/
+const UpdateAddress= lazy(() => import('../pages/Address/UpdateAddress'))
+const UpdateCustomer= lazy(()=> import ('../pages/Customers/UpdateCustomer'))
+const UpdateDriver= lazy(()=> import('../pages/Drivers/UpdateDrivers'))
+const UpdateIssue= lazy(()=> import('../pages/Issues/UpdateIssue'))
+const UpdateMenu= lazy(()=> import('../pages/Menu/UpdateMenu'))
+const UpdateMotorcycle= lazy(()=> import('../pages/Motorcycle/UpdateMotorcycle'))
 
 
 const coreRoutes = [
@@ -40,8 +56,18 @@ const coreRoutes = [
   },
   {
     path: '/list-address',
-    title: 'Direcciones',
+    title: 'CreateAddress',
     component: ListAddresses,
+  },
+  {
+    path: '/create-address',
+    title: 'Direcciones',
+    component: CreateAddress,
+  },
+  {
+    path: '/update-address',
+    title: 'UpdateAddress',
+    component: UpdateAddress,
   },
   {
     path: '/list-customer',
@@ -49,9 +75,29 @@ const coreRoutes = [
     component: ListCustomers,
   },
   {
+    path: '/create-customer',
+    title: 'CreateCustomers',
+    component: CreateCustomer,
+  },
+  {
+    path: '/update-customer',
+    title: 'UpdateCustomers',
+    component: UpdateCustomer,
+  },
+  {
     path: '/list-drivers',
     title: 'Conductores',
     component: ListDrivers,
+  },
+  {
+    path: '/create-drivers',
+    title: 'CreateDrivers',
+    component: CreateDriver,
+  },
+  {
+    path: '/update-drivers',
+    title: 'UpdateDrivers',
+    component: UpdateDriver,
   },
   {
     path: '/list-issues',
@@ -59,14 +105,44 @@ const coreRoutes = [
     component: ListIssues,
   },
   {
+    path: '/create-issues',
+    title: 'CreateIssues',
+    component: CreateIssue,
+  },
+  {
+    path: '/update-issues',
+    title: 'UpdateIssues',
+    component: UpdateIssue,
+  },
+  {
     path: '/list-menu',
     title: 'Menu',
     component: ListMenu,
   },
   {
+    path: '/create-menu',
+    title: 'CreateMenu',
+    component: CreateMenu,
+  },
+  {
+    path: '/update-menu',
+    title: 'UpdateMenu',
+    component: UpdateMenu,
+  },
+  {
     path: '/list-motorcycles',
     title: 'Motocicletas',
     component: ListMotorcycles,
+  },
+  {
+    path: '/create-motorcycles',
+    title: 'CreateMotorcycles',
+    component: CreateMotorcycle,
+  },
+  {
+    path: '/update-motorcycles',
+    title: 'UpdateMotorcycles',
+    component: UpdateMotorcycle,
   },
   {
     path: '/list-orders',
@@ -84,24 +160,9 @@ const coreRoutes = [
     component: ListProducts,
   },
   {
-    path: '/list-roles',
-    title: 'Roles',
-    component: ListRoles,
-  },
-  {
     path: '/list-shifts',
     title: 'Turnos',
     component: ListShifts,
-  },
-  {
-    path: '/update-role/:id',
-    title: 'UpdateUser',
-    component: UpdateRole,
-  },
-  {
-    path: '/create-role',
-    title: 'CreateRole',
-    component: CreateRole,
   },
   {
     path: '/update-user/:id',
@@ -112,16 +173,6 @@ const coreRoutes = [
     path: '/create-user',
     title: 'CreateUser',
     component: CreateUser,
-  },
-  {
-    path: '/list-users',
-    title: 'Usuarios',
-    component: ListUsers,
-  },
-  {
-    path: '/list-roles',
-    title: 'ListRoles',
-    component: ListRoles,
   },
   {
     path: '/calendar',
