@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+import ListUsers from '../components/Users/ListUsers';
 
 const Calendar = lazy(() => import('../pages/Calendar'));
 const Chart = lazy(() => import('../pages/Chart'));
@@ -111,6 +112,11 @@ const coreRoutes = [
     path: '/create-user',
     title: 'CreateUser',
     component: CreateUser,
+  },
+  {
+    path: '/list-users',
+    title: 'Usuarios',
+    component: ListUsers,
   },
   {
     path: '/list-roles',

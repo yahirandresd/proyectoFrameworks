@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import TablaGenerica from "../TablaGenerica";
-import { Edit, Trash2, Plus } from "lucide-react";
+import { Edit, Trash2 } from "lucide-react";
 import { getRestaurants, deleteRestaurant } from "../../services/restaurantService";
 import { Restaurant } from "../../models/Restaurant";
-import { useNavigate } from "react-router-dom";
 
 const ListRestaurants: React.FC = () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const loadRestaurants = async () => {
-      const data = await getRestaurants();
-      setRestaurants(data);
+      try {
+        const data = await getRestaurants();
+        setRestaurants(data);
+      } catch (error) {
+        console.error("Error cargando restaurantes:", error);
+      } finally {
+        setLoading(false);
+      }
     };
     loadRestaurants();
   }, []);
@@ -22,11 +29,19 @@ const ListRestaurants: React.FC = () => {
       navigate(`/update-restaurant/${item.id}`);
     } else if (action === "delete") {
       if (window.confirm(`¿Eliminar el restaurante "${item.name}"?`)) {
-        await deleteRestaurant(item.id);
-        setRestaurants(restaurants.filter(r => r.id !== item.id));
+        try {
+          if (item.id) {
+            await deleteRestaurant(item.id);
+            setRestaurants(restaurants.filter(r => r.id !== item.id));
+          }
+        } catch (error) {
+          console.error("Error eliminando restaurante:", error);
+        }
       }
     }
   };
+
+  if (loading) return <div>Cargando restaurantes...</div>;
 
   return (
     <div className="p-6">
@@ -36,12 +51,13 @@ const ListRestaurants: React.FC = () => {
         </h2>
         <button
           onClick={() => navigate("/create-restaurant")}
-          className="flex items-center bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+          className="flex items-center bg-amarilloCanario hover:bg-yellow-500 text-white px-4 py-2 rounded shadow-sm transition duration-150 dark:bg-amarilloCanario dark:hover:bg-yellow-600"
         >
-          <Plus className="mr-2" size={18} /> Crear Restaurante
+           Crear Restaurante
         </button>
       </div>
-      <TablaGenerica
+
+      <TablaGenerica<Restaurant>
         datos={restaurants}
         columnas={["id", "name", "address", "phone", "email"]}
         acciones={[
