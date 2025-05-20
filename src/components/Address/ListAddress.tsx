@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TablaGenerica from "../TablaGenerica";
-import { Edit, Trash2 } from "lucide-react";
+import { Edit, Trash2, Eye } from "lucide-react";
 import { getAddresses, deleteAddress } from "../../services/addressService";
 import { Address } from "../../models/Address";
 
@@ -35,6 +35,11 @@ const ListAddresses: React.FC = () => {
         datos={addresses}
         columnas={["street", "city", "state", "postal_code"]}
         acciones={[
+          {
+            nombre: "view",
+            etiqueta: "ver",
+            icono: <Eye size={18} className="text-green-600" />,
+          },
           {
             nombre: "edit",
             etiqueta: "Editar",
