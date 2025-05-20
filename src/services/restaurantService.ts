@@ -4,7 +4,7 @@ import { Restaurant } from "../models/Restaurant"; // Ensure you have this model
 // Get all restaurants
 export const getRestaurants = async (): Promise<Restaurant[]> => {
     try {
-        const response = await api.get("/Restaurants");
+        const response = await api.get("/restaurants");
         return response.data;
     } catch (error) {
         console.error("Error fetching restaurants", error);
@@ -15,7 +15,7 @@ export const getRestaurants = async (): Promise<Restaurant[]> => {
 // Get a restaurant by ID
 export const getRestaurantById = async (id: number): Promise<Restaurant | null> => {
     try {
-        const response = await api.get(`/Restaurants/${id}`);
+        const response = await api.get(`/restaurants/${id}`);
         return response.data;
     } catch (error) {
         console.error("Restaurant not found", error);
@@ -26,7 +26,7 @@ export const getRestaurantById = async (id: number): Promise<Restaurant | null> 
 // Create a new restaurant
 export const createRestaurant = async (restaurant: Omit<Restaurant, "id">): Promise<Restaurant | null> => {
     try {
-        const response = await api.post("/Restaurants", restaurant);
+        const response = await api.post("/restaurants", restaurant);
         return response.data;
     } catch (error) {
         console.error("Error creating restaurant", error);
@@ -37,7 +37,7 @@ export const createRestaurant = async (restaurant: Omit<Restaurant, "id">): Prom
 // Update restaurant
 export const updateRestaurant = async (id: number, restaurant: Partial<Restaurant>): Promise<Restaurant | null> => {
     try {
-        const response = await api.put(`/Restaurants/${id}`, restaurant);
+        const response = await api.put(`/restaurants/${id}`, restaurant);
         return response.data;
     } catch (error) {
         console.error("Error updating restaurant", error);
@@ -48,7 +48,7 @@ export const updateRestaurant = async (id: number, restaurant: Partial<Restauran
 // Delete restaurant
 export const deleteRestaurant = async (id: number): Promise<boolean> => {
     try {
-        await api.delete(`/Restaurants/${id}`);
+        await api.delete(`/restaurants/${id}`);
         return true;
     } catch (error) {
         console.error("Error deleting restaurant", error);

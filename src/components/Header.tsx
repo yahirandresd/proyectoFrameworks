@@ -123,9 +123,9 @@ const Header = (props: {
             {/* <!-- Dark Mode Toggler --> */}
             {/* <!-- Notification Menu Area --> */}{' '}
             {/* <!-- Chat Notification Area --> */}
-            {user && <DropdownNotification /> && <Navbar /> && (
-              <DropdownMessage />
-            )}
+            {user && <DropdownNotification /> }
+            {user && <Navbar />}
+            {user && <DropdownMessage />}
             {/* <!-- Notification Menu Area --> */}
           </ul>
 

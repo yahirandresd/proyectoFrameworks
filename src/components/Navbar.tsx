@@ -20,10 +20,9 @@ const Navbar = () => {
 
   return (
     <nav className="p-4 bg-blue-600 text-white flex justify-between">
-      <h1 className="text-xl">Mi App</h1>
       <div className="relative">
         <button className="relative">
-          🔔
+          🔔 Notificaciones
           {notifications > 0 && (
             <span className="absolute top-0 right-0 bg-red-500 text-xs px-2 py-1 rounded-full">
               {notifications}
