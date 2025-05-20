@@ -21,7 +21,7 @@ const CreateDriver: React.FC = () => {
                 alert("✅ Conductor creado con éxito");
                 reset();
             } else {
-                alert("❌ Error al crear el Conductor");
+                alert("❌ Error al crear el C");
             }
         } catch (error) {
             alert("❌ Error inesperado");
@@ -40,7 +40,7 @@ const CreateDriver: React.FC = () => {
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Numero de licencia</label>
-                    <input type="license_number"{...register("license_number", { required: true })} className="mt-1 block w-full border rounded p-2" />
+                    <input type="string"{...register("license_number", { required: true })} className="mt-1 block w-full border rounded p-2" />
                     {errors.license_number && <p className="text-red-600">El numero de licencia es obligatorio</p>}
                 </div>
                 <div>
@@ -55,7 +55,7 @@ const CreateDriver: React.FC = () => {
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Estado</label>
-                    <input type="status" {...register("status", { required: true })} className="mt-1 block w-full border rounded p-2" />
+                    <input type="string" {...register("status", { required: true })} className="mt-1 block w-full border rounded p-2" />
                     {errors.status && <p className="text-red-600">El estado es obligatorio</p>}
                 </div>
                 <button type="submit" className="w-full bg-black text-white py-2 px-4 rounded hover:bg-blue-700">
