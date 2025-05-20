@@ -28,7 +28,7 @@ const ListIssues: React.FC = () => {
 
   const handleAction = async (action: string, item: Issue) => {
     if (action === "edit") {
-      navigate(`/issues/edit/${item.id}`);
+      navigate(`/update-issues/${item.id}`);
     } else if (action === "delete") {
       const result = await Swal.fire({
         title: "¿Estás seguro?",

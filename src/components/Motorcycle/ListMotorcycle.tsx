@@ -30,7 +30,7 @@ const ListMotorcycles: React.FC = () => {
     if (action === "view") {
       navigate(`/motorcycles/view/${item.id}`);
     } else if (action === "edit") {
-      navigate(`/motorcycles/edit/${item.id}`);
+      navigate(`/update-motorcycles/${item.id}`);
     } else if (action === "delete") {
       const result = await Swal.fire({
         title: "¿Estás seguro?",

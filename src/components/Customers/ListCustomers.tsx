@@ -27,7 +27,7 @@ const ListCustomers: React.FC = () => {
 
   const handleAction = async (action: string, item: Customer) => {
     if (action === "edit") {
-      navigate(`/customers/edit/${item.id}`);
+      navigate(`/update-customers/${item.id}`);
     } else if (action === "delete") {
       const result = await Swal.fire({
         title: "¿Estás seguro?",
