@@ -8,9 +8,12 @@ import { useSelector } from 'react-redux';
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const user = useSelector((state: RootState) => state.user.user);
+  const userLocalString = localStorage.getItem('user');
+  const userLocal = userLocalString ? JSON.parse(userLocalString) : null;
+
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
-
+  console.log(userLocal.picture)
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
@@ -66,7 +69,7 @@ const DropdownUser = () => {
             </span>
 
             <span className="h-12 w-12 rounded-full">
-              <img src={UserOne} alt="User" />
+              <img src={userLocal.picture} alt="User" className='h-full w-full object-cover rounded-full' />
             </span>
 
             <svg
