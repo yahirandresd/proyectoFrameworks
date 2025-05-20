@@ -18,7 +18,7 @@ const ListIssues: React.FC = () => {
         const data = await getIssues();
         setIssues(data);
       } catch (error) {
-        console.error("Error al cargar incidencias:", error);
+        console.error("Error al cargar Ausuntos:", error);
       } finally {
         setLoading(false);
       }
@@ -32,7 +32,7 @@ const ListIssues: React.FC = () => {
     } else if (action === "delete") {
       const result = await Swal.fire({
         title: "¿Estás seguro?",
-        text: `Eliminar la incidencia reportada el ${new Date(item.date_reported).toLocaleDateString()}?`,
+        text: `Eliminar la Ausunto reportada el ${new Date(item.date_reported).toLocaleDateString()}?`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#d33",
@@ -45,26 +45,26 @@ const ListIssues: React.FC = () => {
         try {
           await deleteIssue(item.id);
           setIssues(issues.filter((i) => i.id !== item.id));
-          Swal.fire("¡Eliminado!", "La incidencia ha sido eliminada.", "success");
+          Swal.fire("¡Eliminado!", "La Ausunto ha sido eliminada.", "success");
         } catch (error) {
-          console.error("Error al eliminar la incidencia:", error);
-          Swal.fire("Error", "No se pudo eliminar la incidencia.", "error");
+          console.error("Error al eliminar la Ausunto:", error);
+          Swal.fire("Error", "No se pudo eliminar la Ausunto.", "error");
         }
       }
     }
   };
 
-  if (loading) return <div>Cargando incidencias...</div>;
+  if (loading) return <div>Cargando asuntos...</div>;
 
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold text-gray-700 dark:text-white">Lista de Incidencias</h2>
+        <h2 className="text-lg font-semibold text-gray-700 dark:text-white">Lista de Asuntos</h2>
         <button
-          onClick={() => navigate("/issues/create")}
+          onClick={() => navigate("/create-issue")}
           className="flex items-center bg-amarilloCanario hover:bg-yellow-500 text-white px-4 py-2 rounded shadow-sm transition duration-150 dark:bg-amarilloCanario dark:hover:bg-yellow-600"
         >
-           Crear Incidencia
+           Crear Ausunto
         </button>
       </div>
 

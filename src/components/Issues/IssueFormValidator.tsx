@@ -26,7 +26,7 @@ const IssueFormValidator: React.FC<Props> = ({ initialData, onSubmit }) => {
     handleSubmit,
     formState: { errors },
     reset,
-    setValue,
+    setValue, 
   } = useForm<IssueFormData>({
     resolver: yupResolver(schema),
     defaultValues: initialData || {

@@ -60,7 +60,7 @@ const ListCustomers: React.FC = () => {
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold text-gray-700 dark:text-white">Lista de Clientes</h2>
         <button
-          onClick={() => navigate("/customers/create")}
+          onClick={() => navigate("/create-customer")}
           className="flex items-center bg-amarilloCanario hover:bg-yellow-500 text-white px-4 py-2 rounded shadow-sm transition duration-150 dark:bg-amarilloCanario dark:hover:bg-yellow-600"
         >
            Crear Cliente
