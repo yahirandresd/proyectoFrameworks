@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TablaGenerica from "../TablaGenerica";
-import { Edit, Trash2 } from "lucide-react";
+import { Edit, Trash2, Eye } from "lucide-react";
 import { getMotorcycles, deleteMotorcycle } from "../../services/motorcycleService";
 import { Motorcycle } from "../../models/Motorcycle";
 
@@ -48,13 +48,18 @@ const ListMotorcycles: React.FC = () => {
         columnas={["license_plate", "brand", "year", "status"]}
         acciones={[
           {
+            nombre: "view",
+            etiqueta: "ver",
+            icono: <Eye size={18} className="text-green-600" />,
+          },
+          {
             nombre: "edit",
-            etiqueta: "Edit",
+            etiqueta: "Editar",
             icono: <Edit size={18} className="text-blue-600" />,
           },
           {
             nombre: "delete",
-            etiqueta: "Delete",
+            etiqueta: "Eliminar",
             icono: <Trash2 size={18} className="text-red-600" />,
           },
         ]}
