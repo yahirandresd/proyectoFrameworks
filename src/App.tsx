@@ -9,6 +9,7 @@ import Loader from './common/Loader';
 import routes from './routes';
 import ProtectedRoute from "../src/components/Auth/ProtectedRoute";
 import DefaultLayoutNoAuth from './layout/DefaultLayoutNoAuth';
+import MapTracker from './pages/Map/PageMap' 
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
@@ -29,7 +30,7 @@ function App() {
         containerClassName="overflow-auto"
       />
       <Routes>
-        <Route element={<DefaultLayoutNoAuth/>}>
+        <Route element={<DefaultLayoutNoAuth />}>
           <Route path="/auth/signin" element={<SignIn />} />
           <Route path="/auth/signup" element={<SignUp />} />
           <Route index element={<ECommerce />} />
@@ -37,6 +38,15 @@ function App() {
 
         <Route element={<ProtectedRoute />}>
           <Route element={<DefaultLayout />}>
+            {/* Tu ruta fija para MapTracker */}
+            <Route
+              path="/map-tracker"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <MapTracker />
+                </Suspense>
+              }
+            />
             <Route index element={<ECommerce />} />
             {routes.map((routes, index) => {
               const { path, component: Component } = routes;
