@@ -114,13 +114,13 @@ const HeroSection = () => {
               transition={{ delay: 0.6 }}
             >
               <Link
-                to="/login"
+                to="/auth/signin"
                 className="bg-primary text-white px-6 py-2 rounded-md hover:bg-primary-dark transition"
               >
                 Iniciar Sesión
               </Link>
               <Link
-                to="/register"
+                to="/auth/signup"
                 className="bg-white text-primary px-6 py-2 rounded-md hover:bg-gray-100 transition"
               >
                 Registrarse

@@ -10,6 +10,7 @@ const DropdownUser = () => {
   const user = useSelector((state: RootState) => state.user.user);
   const userLocalString = localStorage.getItem('user');
   const userLocal = userLocalString ? JSON.parse(userLocalString) : null;
+  const picture = userLocal?.picture || UserOne;
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
@@ -68,8 +69,8 @@ const DropdownUser = () => {
               <span className="block text-xs">UX Designer</span>
             </span>
 
-            <span className="h-12 w-12 rounded-full">
-              <img src={UserOne} alt="User" className='h-full w-full object-cover rounded-full' />
+            <span className="w-20 rounded-full">
+              <img src={picture} alt="User" className='object-cover rounded-full' />
             </span>
 
             <svg

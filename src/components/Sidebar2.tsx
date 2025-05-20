@@ -592,6 +592,29 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             }`}
                           >
                             <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
+                              {/* Proyecto */}
+                              <li>
+                                <NavLink
+                                  to="/list-address"
+                                  className={({ isActive }) =>
+                                    'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                    (isActive && '!text-white')
+                                  }
+                                >
+                                  Address
+                                </NavLink>
+                              </li>
+                              <li>
+                                <NavLink
+                                  to="/list-customers"
+                                  className={({ isActive }) =>
+                                    'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                    (isActive && '!text-white')
+                                  }
+                                >
+                                  Customers
+                                </NavLink>
+                              </li>
                               <li>
                                 <NavLink
                                   to="/forms/form-elements"
@@ -600,18 +623,73 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                     (isActive && '!text-white')
                                   }
                                 >
-                                  Form Elements
+                                  Drivers
                                 </NavLink>
                               </li>
                               <li>
                                 <NavLink
-                                  to="/forms/form-layout"
+                                  to="/forms/form-elements"
                                   className={({ isActive }) =>
                                     'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                     (isActive && '!text-white')
                                   }
                                 >
-                                  Form Layout
+                                  Issues
+                                </NavLink>
+                              </li>
+                              <li>
+                                <NavLink
+                                  to="/forms/form-elements"
+                                  className={({ isActive }) =>
+                                    'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                    (isActive && '!text-white')
+                                  }
+                                >
+                                  Menu
+                                </NavLink>
+                              </li>
+                              <li>
+                                <NavLink
+                                  to="/forms/form-elements"
+                                  className={({ isActive }) =>
+                                    'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                    (isActive && '!text-white')
+                                  }
+                                >
+                                  Motorcycle
+                                </NavLink>
+                              </li>
+                              <li>
+                                <NavLink
+                                  to="/forms/form-elements"
+                                  className={({ isActive }) =>
+                                    'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                    (isActive && '!text-white')
+                                  }
+                                >
+                                  Orders
+                                </NavLink>
+                              </li>
+                              <li>
+                                <NavLink
+                                  to="/forms/form-elements"
+                                  className={({ isActive }) =>
+                                    'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                    (isActive && '!text-white')
+                                  }
+                                >
+                                  Products
+                                </NavLink>
+                              </li>
+                              <li>
+                                <NavLink
+                                  to="/forms/form-elements"
+                                  className={({ isActive }) =>
+                                    'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
+                                    (isActive && '!text-white')
+                                  }
+                                >
+                                  Restaurants
                                 </NavLink>
                               </li>
                             </ul>
