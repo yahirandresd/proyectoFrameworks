@@ -65,22 +65,22 @@ const coreRoutes = [
     component: CreateAddress,
   },
   {
-    path: '/update-address',
+    path: '/update-address/:id',
     title: 'UpdateAddress',
     component: UpdateAddress,
   },
   {
-    path: '/list-customer',
+    path: '/list-customers',
     title: 'Clientes',
     component: ListCustomers,
   },
   {
-    path: '/create-customer',
+    path: '/create-customers',
     title: 'CreateCustomers',
     component: CreateCustomer,
   },
   {
-    path: '/update-customer',
+    path: '/update-customers/:id',
     title: 'UpdateCustomers',
     component: UpdateCustomer,
   },
@@ -95,7 +95,7 @@ const coreRoutes = [
     component: CreateDriver,
   },
   {
-    path: '/update-drivers',
+    path: '/update-drivers/:id',
     title: 'UpdateDrivers',
     component: UpdateDriver,
   },
@@ -110,7 +110,7 @@ const coreRoutes = [
     component: CreateIssue,
   },
   {
-    path: '/update-issues',
+    path: '/update-issues/:id',
     title: 'UpdateIssues',
     component: UpdateIssue,
   },
@@ -125,7 +125,7 @@ const coreRoutes = [
     component: CreateMenu,
   },
   {
-    path: '/update-menu',
+    path: '/update-menu/:id',
     title: 'UpdateMenu',
     component: UpdateMenu,
   },
@@ -140,7 +140,7 @@ const coreRoutes = [
     component: CreateMotorcycle,
   },
   {
-    path: '/update-motorcycles',
+    path: '/update-motorcycles/:id',
     title: 'UpdateMotorcycles',
     component: UpdateMotorcycle,
   },
