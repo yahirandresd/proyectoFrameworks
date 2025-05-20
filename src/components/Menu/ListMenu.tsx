@@ -34,7 +34,7 @@ const ListMenus: React.FC = () => {
     if (!originalMenu) return;
 
     if (action === "edit") {
-      navigate(`/menus/edit/${originalMenu.id}`);
+      navigate(`/update-menu/${originalMenu.id}`);
     } else if (action === "delete") {
       const result = await Swal.fire({
         title: "¿Estás seguro?",

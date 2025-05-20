@@ -29,7 +29,7 @@ const ListAddresses: React.FC = () => {
     if (action === "view") {
       navigate(`/addresses/view/${item.id}`);
     } else if (action === "edit") {
-      navigate(`/addresses/edit/${item.id}`);
+      navigate(`/update-address/${item.id}`);
     } else if (action === "delete") {
       const result = await Swal.fire({
         title: "¿Estás seguro?",
