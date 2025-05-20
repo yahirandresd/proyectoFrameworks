@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import TablaGenerica from "../TablaGenerica";
 import { Edit, Trash2, UserCheck, UserX } from "lucide-react";
 import { getUsers, deleteUser } from "../../services/userService";
@@ -7,6 +8,7 @@ import { User } from "../../models/User";
 const ListUsers: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadUsers = async () => {
@@ -24,7 +26,7 @@ const ListUsers: React.FC = () => {
 
   const handleAction = async (action: string, item: User) => {
     if (action === "edit") {
-      console.log("Edit user:", item);
+      navigate(`/users/edit/${item.id}`);
     } else if (action === "delete") {
       if (window.confirm(`Delete user ${item.name}?`)) {
         try {
@@ -43,17 +45,26 @@ const ListUsers: React.FC = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-lg font-semibold text-gray-700 mb-4">User List</h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-semibold text-gray-700">Lista de Usuarios</h2>
+        <button
+          onClick={() => navigate("/create-users")}
+          className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded shadow-sm transition duration-150"
+        >
+          Crear Usuario
+        </button>
+      </div>
+
       <TablaGenerica<User>
         datos={users.map(user => ({
           ...user,
           is_active_display: user.is_active ? (
             <span className="text-green-500 flex items-center">
-              <UserCheck className="mr-1" size={16} /> Active
+              <UserCheck className="mr-1" size={16} /> Activo
             </span>
           ) : (
             <span className="text-red-500 flex items-center">
-              <UserX className="mr-1" size={16} /> Inactive
+              <UserX className="mr-1" size={16} /> Inactivo
             </span>
           )
         }))}
@@ -61,12 +72,12 @@ const ListUsers: React.FC = () => {
         acciones={[
           {
             nombre: "edit",
-            etiqueta: "Edit",
+            etiqueta: "Editar",
             icono: <Edit size={18} className="text-blue-600" />,
           },
           {
             nombre: "delete",
-            etiqueta: "Delete",
+            etiqueta: "Eliminar",
             icono: <Trash2 size={18} className="text-red-600" />,
           },
         ]}

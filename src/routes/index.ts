@@ -19,13 +19,11 @@ const Settings = lazy(() => import('../pages/Settings'));
 const Tables = lazy(() => import('../pages/Tables'));
 const Alerts = lazy(() => import('../pages/UiElements/Alerts'));
 const Buttons = lazy(() => import('../pages/UiElements/Buttons'));
-const ListUsers= lazy(() => import('../pages/Users/page'))
-const CreateUser= lazy(() => import('../pages/Users/Create'))
-const UpdateUser= lazy(() => import('../pages/Users/Update'))
+const CreateUser= lazy(() => import('../pages/Users/CreateUser'))
+const UpdateUser= lazy(() => import('../pages/Users/UpdateUsers'))
 const CreateRole= lazy(() => import('../pages/Roles/Create'))
 const UpdateRole= lazy(() => import('../pages/Roles/Update'))
 /*Ejemplos Ejercicio*/
-const ListUsuarios= lazy(() => import('../pages/Users/PageUsuarios'))
 const ListRoles= lazy(() => import('../pages/Roles/RolesPage'))
 const ListPermisos= lazy(() => import('../pages/Permisos/PermisosPage'))
 const ListRestaurants = lazy(() => import('../components/Address/ListAddress'))
@@ -120,16 +118,6 @@ const coreRoutes = [
     path: '/list-roles',
     title: 'ListRoles',
     component: ListRoles,
-  },
-  {
-    path: '/list-usuarios',
-    title: 'ListUsuarios',
-    component: ListUsuarios,
-  },
-  {
-    path: '/list-users',
-    title: 'ListUsers',
-    component: ListUsers,
   },
   {
     path: '/calendar',
