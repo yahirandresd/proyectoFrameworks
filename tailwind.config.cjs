@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
+const colors = require('tailwindcss/colors');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -9,6 +10,8 @@ module.exports = {
       satoshi: ['Satoshi', 'sans-serif'],
     },
     colors: {
+      ...colors,
+      amarilloCanario: '#ffcb02',
       current: 'currentColor',
       transparent: 'transparent',
       white: '#FFFFFF',

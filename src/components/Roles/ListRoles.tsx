@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import TablaGenerica from "../TablaGenerica";
 import { Edit, Trash2 } from "lucide-react";
 import { getRoles, deleteRole } from "../../services/roleService";
@@ -7,6 +8,7 @@ import { Role } from "../../models/Role";
 const ListRoles: React.FC = () => {
   const [roles, setRoles] = useState<Role[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadRoles = async () => {
@@ -24,8 +26,7 @@ const ListRoles: React.FC = () => {
 
   const handleAction = async (action: string, item: Role) => {
     if (action === "edit") {
-      console.log("Editar rol:", item);
-      // Lógica para editar
+      navigate(`/roles/edit/${item.id}`);
     } else if (action === "delete") {
       if (window.confirm(`¿Eliminar el rol "${item.nombre}"?`)) {
         try {
@@ -44,7 +45,16 @@ const ListRoles: React.FC = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-lg font-semibold text-gray-700 mb-4">Lista de Roles</h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-lg font-semibold text-gray-700">Lista de Roles</h2>
+        <button
+          onClick={() => navigate("/create-role")}
+          className="bg-amarilloCanario hover:bg-yellow-500 text-white px-4 py-2 rounded shadow-sm transition duration-150 dark:bg-amarilloCanario dark:hover:bg-yellow-600"
+        >
+          Crear Rol
+        </button>
+      </div>
+
       <TablaGenerica<Role>
         datos={roles}
         columnas={["nombre"]}
