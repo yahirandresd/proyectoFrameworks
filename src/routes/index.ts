@@ -15,7 +15,6 @@ const CreateRole= lazy(() => import('../pages/Roles/Create'))
 const UpdateRole= lazy(() => import('../pages/Roles/Update'))
 /*Ejemplos Ejercicio*/
 const ListRoles= lazy(() => import('../pages/Roles/RolesPage'))
-const ListPermisos= lazy(() => import('../pages/Permisos/PermisosPage'))
 
 /*PROYECTO*/
 /*Listar*/
@@ -112,11 +111,6 @@ const coreRoutes = [
     path: '/create-user',
     title: 'CreateUser',
     component: CreateUser,
-  },
-  {
-    path: '/list-permisos',
-    title: 'ListPermisos',
-    component: ListPermisos,
   },
   {
     path: '/list-roles',
