@@ -48,8 +48,8 @@ const ListUsers: React.FC = () => {
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold text-gray-700">Lista de Usuarios</h2>
         <button
-          onClick={() => navigate("/create-users")}
-          className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded shadow-sm transition duration-150"
+          onClick={() => navigate("/create-user")}
+          className="bg-amarilloCanario hover:bg-yellow-500 text-white px-4 py-2 rounded shadow-sm transition duration-150 dark:bg-amarilloCanario dark:hover:bg-yellow-600"
         >
           Crear Usuario
         </button>

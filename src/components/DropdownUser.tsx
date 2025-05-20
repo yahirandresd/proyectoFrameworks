@@ -13,7 +13,7 @@ const DropdownUser = () => {
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
-  console.log(userLocal.picture)
+  console.log(userLocal?.picture)
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
@@ -69,7 +69,7 @@ const DropdownUser = () => {
             </span>
 
             <span className="h-12 w-12 rounded-full">
-              <img src={userLocal.picture} alt="User" className='h-full w-full object-cover rounded-full' />
+              <img src={UserOne} alt="User" className='h-full w-full object-cover rounded-full' />
             </span>
 
             <svg
