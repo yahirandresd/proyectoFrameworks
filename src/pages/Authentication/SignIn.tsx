@@ -11,8 +11,10 @@ import { useGoogleLogin } from '@react-oauth/google';
 import googleLogo from "../../images/logo/icons8-logo-de-google.svg"
 import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 const SignIn: React.FC = () => {
 
+  const navigate = useNavigate();
   const handleLogin = async (user: User) => {
     console.log("aqui " + JSON.stringify(user))
     try {
@@ -40,7 +42,7 @@ const SignIn: React.FC = () => {
         localStorage.setItem('token', tokenResponse.access_token)
 
         console.log('Usuario de Google:', userInfo);
-        window.location.href = "/";
+        navigate('/');
       } catch (error) {
         console.error('Error al obtener información del usuario', error);
       }
@@ -52,7 +54,7 @@ const SignIn: React.FC = () => {
 
   return (
     <>
-  
+
 
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center">
@@ -104,7 +106,11 @@ const SignIn: React.FC = () => {
                       Acceder
                     </button>
                     <button
-                      onClick={() => login()}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        login();
+                      }
+                      }
                       className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50"
                     >
                       <img src={googleLogo} alt="Google" className="w-5 h-5" />
@@ -114,12 +120,12 @@ const SignIn: React.FC = () => {
                     <Link
                       to={"/auth/signup"}
                     >
-                    <button
-                      type="submit"
-                      className="w-full cursor-pointer rounded-lg border border-primary bg-black-2 p-4 text-white transition hover:bg-opacity-90"
-                    >
-                      Registrate
-                    </button>
+                      <button
+                        type="submit"
+                        className="w-full cursor-pointer rounded-lg border border-primary bg-black-2 p-4 text-white transition hover:bg-opacity-90"
+                      >
+                        Registrate
+                      </button>
                     </Link>
 
                   </Form>

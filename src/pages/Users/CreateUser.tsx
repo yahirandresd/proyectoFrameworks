@@ -36,7 +36,7 @@ const CreateUser: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">Nombre</label>
-          <input {...register("name", { required: true })} className="mt-1 block w-full border rounded p-2" />
+          <input type ="name"{...register("name", { required: true })} className="mt-1 block w-full border rounded p-2" />
           {errors.name && <p className="text-red-600">El nombre es obligatorio</p>}
         </div>
         <div>
