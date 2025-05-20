@@ -5,7 +5,7 @@ import axios from "axios";
 const EXCLUDED_ROUTES = ["/login", "/register"];
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL, // Cambia la URL base según tu API
+    baseURL: import.meta.env.VITE_API_URL2, // Cambia la URL base según tu API
     headers: { "Content-Type": "application/json" },
 });
 
