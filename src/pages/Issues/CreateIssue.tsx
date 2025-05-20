@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { createIssue } from "../../services/issueService"; // Ajusta la ruta si es necesario
 
 interface IssueFormValues {
+    motorcycle_id: number;
     description: string;
     issue_type: string;
     date_reported: Date; 
@@ -32,23 +33,28 @@ const CreateIssue: React.FC = () => {
       <h1 className="text-2xl font-bold mb-6">Crear Asunto</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
+          <label className="block text-sm font-medium text-gray-700">Id motocicleta</label>
+          <input type ="number"{...register("motorcycle_id", { required: true })} className="mt-1 block w-full border rounded p-2" />
+          {errors.motorcycle_id && <p className="text-red-600">El id de la motocicleta es obligatorio</p>}
+        </div>
+        <div>
           <label className="block text-sm font-medium text-gray-700">Descripcion</label>
-          <input type ="description"{...register("description", { required: true })} className="mt-1 block w-full border rounded p-2" />
+          <input type ="string"{...register("description", { required: true })} className="mt-1 block w-full border rounded p-2" />
           {errors.description && <p className="text-red-600">La descripcion es obligatoria</p>}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">Tipo de asunto</label>
-          <input type="issue_type" {...register("issue_type", { required: true })} className="mt-1 block w-full border rounded p-2" />
+          <input type="string" {...register("issue_type", { required: true })} className="mt-1 block w-full border rounded p-2" />
           {errors.issue_type && <p className="text-red-600">El tipo es obligatorio</p>}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">Fecha reportada</label>
-          <input type="date_reported" {...register("date_reported", { required: true })} className="mt-1 block w-full border rounded p-2" />
+          <input type="date" {...register("date_reported", { required: true })} className="mt-1 block w-full border rounded p-2" />
           {errors.date_reported && <p className="text-red-600">La fecha es obligatoria</p>}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">Estado</label>
-          <input type="status" {...register("status", { required: true })} className="mt-1 block w-full border rounded p-2" />
+          <input type="string" {...register("status", { required: true })} className="mt-1 block w-full border rounded p-2" />
           {errors.status && <p className="text-red-600">El estado es obligatorio</p>}
         </div>
         <button type="submit" className="w-full bg-black text-white py-2 px-4 rounded hover:bg-blue-700">

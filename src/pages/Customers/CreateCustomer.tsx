@@ -43,11 +43,11 @@ const CreateCustomer: React.FC = () => {
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Telefono</label>
-                    <input type="phone" {...register("phone", { required: true })} className="mt-1 block w-full border rounded p-2" />
+                    <input type="number" {...register("phone", { required: true })} className="mt-1 block w-full border rounded p-2" />
                     {errors.phone && <p className="text-red-600">El Telefono es obligatorio</p>}
                 </div>
                 <button type="submit" className="w-full bg-black text-white py-2 px-4 rounded hover:bg-blue-700">
-                    Guardar Telefono
+                    Guardar 
                 </button>
             </form>
         </div>

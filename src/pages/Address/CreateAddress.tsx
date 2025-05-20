@@ -4,6 +4,7 @@ import { createAddress } from "../../services/addressService"; // Ajusta la ruta
 
 interface AddressFormValues {
     id: number;
+    order_id: number;
     street: string; // Calle
     city: string; // Ciudad
     state: string; // Estado
@@ -35,23 +36,33 @@ const CreateAddress: React.FC = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Calle</label>
-                    <input type="street"{...register("street", { required: true })} className="mt-1 block w-full border rounded p-2" />
+                    <input type="string"{...register("street", { required: true })} className="mt-1 block w-full border rounded p-2" />
                     {errors.street && <p className="text-red-600">La Calle es obligatoria</p>}
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Ciudad</label>
-                    <input type="city" {...register("city", { required: true })} className="mt-1 block w-full border rounded p-2" />
+                    <input type="string" {...register("city", { required: true })} className="mt-1 block w-full border rounded p-2" />
                     {errors.city && <p className="text-red-600">La ciudad es obligatoria</p>}
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Estado</label>
-                    <input type="state" {...register("state", { required: true })} className="mt-1 block w-full border rounded p-2" />
+                    <input type="string" {...register("state", { required: true })} className="mt-1 block w-full border rounded p-2" />
                     {errors.state && <p className="text-red-600">El estado es obligatorio</p>}
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Codigo postal</label>
-                    <input type="postal_code" {...register("postal_code", { required: true })} className="mt-1 block w-full border rounded p-2" />
+                    <input type="string" {...register("postal_code", { required: true })} className="mt-1 block w-full border rounded p-2" />
                     {errors.postal_code && <p className="text-red-600">El codigo postal es obligatorio</p>}
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Id orden</label>
+                    <input type="number" {...register("order_id", { required: true })} className="mt-1 block w-full border rounded p-2" />
+                    {errors.order_id && <p className="text-red-600">El id de la orden es obligatorio</p>}
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Informacion adicional</label>
+                    <input type="string" {...register("additional_info", { required: true })} className="mt-1 block w-full border rounded p-2" />
+                    {errors.additional_info && <p className="text-red-600">La informacion es obligatoria</p>}
                 </div>
                 <button type="submit" className="w-full bg-black text-white py-2 px-4 rounded hover:bg-blue-700">
                     Guardar Direccion

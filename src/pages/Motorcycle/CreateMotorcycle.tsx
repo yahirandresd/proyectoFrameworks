@@ -34,22 +34,22 @@ const CreateMotorcycle: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">Matricula</label>
-          <input type="license_plate"{...register("license_plate", { required: true })} className="mt-1 block w-full border rounded p-2" />
+          <input type="string"{...register("license_plate", { required: true })} className="mt-1 block w-full border rounded p-2" />
           {errors.license_plate && <p className="text-red-600">La matricula es obligatoria</p>}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">Marca</label>
-          <input type="brand" {...register("brand", { required: true })} className="mt-1 block w-full border rounded p-2" />
+          <input type="string" {...register("brand", { required: true })} className="mt-1 block w-full border rounded p-2" />
           {errors.brand && <p className="text-red-600">El email es obligatorio</p>}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">Año</label>
-          <input type="year" {...register("year", { required: true })} className="mt-1 block w-full border rounded p-2" />
+          <input type="number" {...register("year", { required: true })} className="mt-1 block w-full border rounded p-2" />
           {errors.year && <p className="text-red-600">El año es obligatorio</p>}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">Estado</label>
-          <input type="status" {...register("status", { required: true })} className="mt-1 block w-full border rounded p-2" />
+          <input type="string" {...register("status", { required: true })} className="mt-1 block w-full border rounded p-2" />
           {errors.status && <p className="text-red-600">El estado es obligatorio</p>}
         </div>
         <button type="submit" className="w-full bg-black text-white py-2 px-4 rounded hover:bg-blue-700">
