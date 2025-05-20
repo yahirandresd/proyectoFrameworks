@@ -7,5 +7,5 @@ export interface User {
     city: string;
     phone: string;
     is_active: boolean;
-    token:string;
+    token?:string;
 }
