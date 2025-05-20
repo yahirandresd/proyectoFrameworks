@@ -1,4 +1,4 @@
-import Permisos from "../../components/Permisos/ListPermisos";
+import Permisos from "../../components/Permissions/ListPermissions";
 import Breadcrumb from "../../components/Breadcrumb";
 
 const PermisosPage: React.FC = () => {
