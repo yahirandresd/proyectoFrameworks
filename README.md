@@ -35,9 +35,9 @@
 
 Este proyecto fue desarrollado por tres compañeros estudiantes de Ingeniería de Sistemas y Computación:
 
-- [Jesús David Milian Saza](https://github.com/jesus-git)  
-- [Carlos David Soto](https://github.com/carlos-git)  
-- [Yahir Andres Rangel Duenas](https://github.com/yahir-git)
+- [Jesús David Milian Saza](https://github.com/jesucr1st0)  
+- [Carlos David Soto](https://github.com/SotoCarlos12)  
+- [Yahir Andres Rangel Duenas](https://github.com/yahirandresd)
 
 ---
 
