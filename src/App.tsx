@@ -8,6 +8,7 @@ import SignUp from './pages/Authentication/SignUp';
 import Loader from './common/Loader';
 import routes from './routes';
 import ProtectedRoute from "../src/components/Auth/ProtectedRoute";
+import DefaultLayoutNoAuth from './layout/DefaultLayoutNoAuth';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
@@ -28,8 +29,11 @@ function App() {
         containerClassName="overflow-auto"
       />
       <Routes>
-        <Route path="/auth/signin" element={<SignIn />} />
-        <Route path="/auth/signup" element={<SignUp />} />
+        <Route element={<DefaultLayoutNoAuth/>}>
+          <Route path="/auth/signin" element={<SignIn />} />
+          <Route path="/auth/signup" element={<SignUp />} />
+          <Route index element={<ECommerce />} />
+        </Route>
 
         <Route element={<ProtectedRoute />}>
           <Route element={<DefaultLayout />}>

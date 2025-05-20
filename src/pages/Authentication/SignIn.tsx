@@ -10,6 +10,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import { useGoogleLogin } from '@react-oauth/google';
 import googleLogo from "../../images/logo/icons8-logo-de-google.svg"
 import { jwtDecode } from "jwt-decode";
+import { Link } from "react-router-dom";
 const SignIn: React.FC = () => {
 
   const handleLogin = async (user: User) => {
@@ -32,9 +33,11 @@ const SignIn: React.FC = () => {
           },
         });
         const userInfo = await res.json();
+        console.log(userInfo)
 
         // Guardar en localStorage
         localStorage.setItem('user', JSON.stringify(userInfo));
+        localStorage.setItem('token', tokenResponse.access_token)
 
         console.log('Usuario de Google:', userInfo);
         window.location.href = "/";
@@ -49,7 +52,7 @@ const SignIn: React.FC = () => {
 
   return (
     <>
-      <Breadcrumb pageName="Iniciar sesion" />
+  
 
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center">
@@ -58,7 +61,7 @@ const SignIn: React.FC = () => {
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
               <span className="mb-1.5 block font-medium text-center mx-auto">Comienza!</span>
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2 text-center mx-auto">
-                Inicio de sesion
+                Inicio de sesión
               </h2>
 
 
@@ -107,7 +110,17 @@ const SignIn: React.FC = () => {
                       <img src={googleLogo} alt="Google" className="w-5 h-5" />
                       Iniciar sesión con Google
                     </button>
-
+                    <h1 className="text-center">o</h1>
+                    <Link
+                      to={"/auth/signup"}
+                    >
+                    <button
+                      type="submit"
+                      className="w-full cursor-pointer rounded-lg border border-primary bg-black-2 p-4 text-white transition hover:bg-opacity-90"
+                    >
+                      Registrate
+                    </button>
+                    </Link>
 
                   </Form>
                 )}
