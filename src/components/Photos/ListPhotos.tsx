@@ -49,7 +49,7 @@ const ListPhotos: React.FC = () => {
           Lista de Fotos
         </h2>
         <button
-          onClick={() => navigate("/photos/create")}
+          onClick={() => navigate("/create-photo")}
           className="flex items-center bg-amarilloCanario hover:bg-yellow-500 text-white px-4 py-2 rounded shadow-sm transition duration-150 dark:bg-amarilloCanario dark:hover:bg-yellow-600"
         >
            Crear Foto

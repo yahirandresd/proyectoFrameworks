@@ -51,7 +51,7 @@ const ListProducts: React.FC = () => {
           Lista de Productos
         </h2>
         <button
-          onClick={() => navigate("/products/create")}
+          onClick={() => navigate("/create-product")}
           className="flex items-center bg-amarilloCanario hover:bg-yellow-500 text-white px-4 py-2 rounded shadow-sm transition duration-150 dark:bg-amarilloCanario dark:hover:bg-yellow-600"
         >
            Crear Producto

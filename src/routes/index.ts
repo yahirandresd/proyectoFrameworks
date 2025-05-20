@@ -1,5 +1,4 @@
 import { lazy } from 'react';
-import ListUsers from '../components/Users/ListUsers';
 
 const Calendar = lazy(() => import('../pages/Calendar'));
 const Chart = lazy(() => import('../pages/Chart'));
