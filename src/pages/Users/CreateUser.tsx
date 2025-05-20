@@ -1,29 +1,33 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-
-const schema = yup.object().shape({
-  name: yup.string().required("El nombre es obligatorio"),
-  email: yup.string().email("Email inválido").required("El email es obligatorio"),
-  role: yup.string().required("El rol es obligatorio"),
-});
+import { createUser } from "../../services/userService"; // Ajusta la ruta si es necesario
 
 interface UserFormValues {
   name: string;
   email: string;
-  role: string;
+  password: string;
+  age: number;
+  city: string;
+  phone: string;
+  is_active: boolean;
 }
 
 const CreateUser: React.FC = () => {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<UserFormValues>({
-    resolver: yupResolver(schema),
-  });
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<UserFormValues>();
 
-  const onSubmit = (data: UserFormValues) => {
-    // Aquí iría la lógica para guardar el usuario
-    alert("Usuario creado: " + JSON.stringify(data));
-    reset();
+  const onSubmit = async (data: UserFormValues) => {
+    try {
+      const result = await createUser(data); // Hace POST al backend
+      if (result) {
+        alert("✅ Usuario creado con éxito");
+        reset();
+      } else {
+        alert("❌ Error al crear el usuario");
+      }
+    } catch (error) {
+      alert("❌ Error inesperado");
+      console.error(error);
+    }
   };
 
   return (
@@ -32,18 +36,37 @@ const CreateUser: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">Nombre</label>
-          <input {...register("name")} className="mt-1 block w-full border rounded p-2" />
-          {errors.name && <p className="text-red-600">{errors.name.message}</p>}
+          <input {...register("name", { required: true })} className="mt-1 block w-full border rounded p-2" />
+          {errors.name && <p className="text-red-600">El nombre es obligatorio</p>}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">Email</label>
-          <input type="email" {...register("email")} className="mt-1 block w-full border rounded p-2" />
-          {errors.email && <p className="text-red-600">{errors.email.message}</p>}
+          <input type="email" {...register("email", { required: true })} className="mt-1 block w-full border rounded p-2" />
+          {errors.email && <p className="text-red-600">El email es obligatorio</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">Rol</label>
-          <input {...register("role")} className="mt-1 block w-full border rounded p-2" />
-          {errors.role && <p className="text-red-600">{errors.role.message}</p>}
+          <label className="block text-sm font-medium text-gray-700">Contraseña</label>
+          <input type="password" {...register("password", { required: true })} className="mt-1 block w-full border rounded p-2" />
+          {errors.password && <p className="text-red-600">La contraseña es obligatoria</p>}
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Edad</label>
+          <input type="number" {...register("age", { required: true })} className="mt-1 block w-full border rounded p-2" />
+          {errors.age && <p className="text-red-600">La edad es obligatoria</p>}
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Ciudad</label>
+          <input {...register("city", { required: true })} className="mt-1 block w-full border rounded p-2" />
+          {errors.city && <p className="text-red-600">La ciudad es obligatoria</p>}
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Teléfono</label>
+          <input {...register("phone", { required: true })} className="mt-1 block w-full border rounded p-2" />
+          {errors.phone && <p className="text-red-600">El teléfono es obligatorio</p>}
+        </div>
+        <div className="flex items-center gap-2">
+          <input type="checkbox" {...register("is_active")} />
+          <label className="text-sm">¿Está activo?</label>
         </div>
         <button type="submit" className="w-full bg-black text-white py-2 px-4 rounded hover:bg-blue-700">
           Guardar Usuario
