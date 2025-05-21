@@ -46,10 +46,9 @@ const CreateMenu: React.FC = () => {
           <input type ="number"{...register("price", { required: true })} className="mt-1 block w-full border rounded p-2" />
           {errors.price && <p className="text-red-600">El precio es obligatorio</p>}
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Disponibilidad</label>
-          <input type="boolean" {...register("availability", { required: true })} className="mt-1 block w-full border rounded p-2" />
-          {errors.availability && <p className="text-red-600">La disponibilidad del menu es obligatoria</p>}
+        <div className="flex items-center gap-2">
+          <input type="checkbox" {...register("availability")} />
+          <label className="text-sm">¿Está disponible?</label>
         </div>
         <button type="submit" className="w-full bg-black text-white py-2 px-4 rounded hover:bg-blue-700">
           Guardar Menu
