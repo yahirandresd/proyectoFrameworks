@@ -33,6 +33,8 @@ const MenuFormValidator: React.FC<Props> = ({ initialData, onSubmit }) => {
     defaultValues: initialData || {
       price: 0,
       availability: true,
+      restaurant_id: 0,
+      product_id: 0
     },
   });
 

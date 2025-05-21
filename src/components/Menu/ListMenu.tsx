@@ -77,7 +77,7 @@ const ListMenus: React.FC = () => {
       </div>
 
       <TablaGenerica<
-        { id: number; price: string; availability: JSX.Element }
+        { id: number; price: string; availability: JSX.Element; restaurant_id: number; product_id: number }
       >
         datos={menus.map((menu) => ({
           id: menu.id,
@@ -91,8 +91,10 @@ const ListMenus: React.FC = () => {
               <XCircle className="mr-1" size={16} /> No disponible
             </span>
           ),
+          restaurant_id: menu.restaurant_id ?? 0,
+          product_id: menu.product_id ?? 0,
         }))}
-        columnas={["price", "availability"]}
+        columnas={["price" , "availability", "restaurant_id", "product_id"]}
         acciones={[
           {
             nombre: "edit",
