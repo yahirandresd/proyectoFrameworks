@@ -27,7 +27,7 @@ const ListAddresses: React.FC = () => {
 
   const handleAction = async (action: string, item: Address) => {
     if (action === "view") {
-      navigate(`/addresses/view/${item.id}`);
+      navigate(`/view-address/${item.id}`);
     } else if (action === "edit") {
       navigate(`/update-address/${item.id}`);
     } else if (action === "delete") {

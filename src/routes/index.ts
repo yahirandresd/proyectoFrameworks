@@ -47,14 +47,19 @@ const UpdateIssue= lazy(()=> import('../pages/Issues/UpdateIssue'))
 const UpdateMenu= lazy(()=> import('../pages/Menu/UpdateMenu'))
 const UpdateMotorcycle= lazy(()=> import('../pages/Motorcycle/UpdateMotorcycle'))
 
+/*PROYECTO*/
+/*ver*/
+const ViewMenu = lazy(() => import("../pages/Menu/viewMenu"))
+const ViewUser = lazy(() => import("../pages/Users/ViewUser"))
+const ViewMotorcycle = lazy(() => import("../pages/Motorcycle/ViewMotorcycle"))
+const ViewIssue = lazy(() => import("../pages/Issues/ViewIssue"))
+const ViewDriver = lazy(() => import("../pages/Drivers/ViewDriver"))
+const ViewCustomer = lazy(() => import("../pages/Customers/ViewCustomer"))
+const ViewAddress = lazy(() => import("../pages/Address/ViewAddress"))
+
 const Mapa= lazy(()=> import('../components/Map/Map'))
 
 const coreRoutes = [
-  {
-    path: '/map',
-    title: 'Dashboard',
-    component: Mapa,
-  },
   {
     path: '/list-restaurants',
     title: 'Restaurantes',

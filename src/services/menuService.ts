@@ -12,6 +12,18 @@ export const getMenus = async (): Promise<Menu[]> => {
     }
 };
 
+// Obtener un menú por ID (viewMenu)
+export const viewMenu = async (id: number): Promise<Menu | null> => {
+  try {
+    const response = await api.get(`/menus/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error al obtener el menú:", error);
+    return null;
+  }
+};
+
+
 // Obtener un menú por ID
 export const getMenuById = async (id: number): Promise<Menu | null> => {
     try {
