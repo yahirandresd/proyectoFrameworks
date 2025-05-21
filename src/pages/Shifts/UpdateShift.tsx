@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
 import { Shift } from "../../models/Shift";
 import { getShiftById, updateShift } from "../../services/shiftService";
+import Swal from "sweetalert2";
 
 const EditShift: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -16,7 +17,7 @@ const EditShift: React.FC = () => {
       if (!shift) {
         navigate("/", { replace: true });
         setTimeout(() => {
-          alert("Turno no encontrado");
+          Swal.fire({ title: "turno no encontrada", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
         }, 0);
         return;
       }
@@ -41,14 +42,14 @@ const EditShift: React.FC = () => {
       };
       const updated = await updateShift(Number(id), payload);
       if (updated) {
-        alert("Turno actualizado con éxito");
-        navigate("/shifts");
+        Swal.fire({ title: "turno actualizado con éxito", icon: "success", confirmButtonText: "Aceptar", confirmButtonColor: "#28a745" });
+        navigate("/list-shifts");
       } else {
-        alert("Error actualizando turno");
+        Swal.fire({ title: "Error actualizando turno", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
       }
     } catch (error) {
       console.error("Error actualizando turno:", error);
-      alert("Error actualizando turno");
+      Swal.fire({ title: "Error actualizando turno", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
     }
   };
 

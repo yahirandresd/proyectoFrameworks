@@ -1,7 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { createAddress } from "../../services/addressService"; // Ajusta la ruta si es necesario
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 interface AddressFormValues {
     id: number;
     order_id: number;
@@ -13,19 +14,25 @@ interface AddressFormValues {
 }
 
 const CreateAddress: React.FC = () => {
+    const navigate= useNavigate();
     const { register, handleSubmit, formState: { errors }, reset } = useForm<AddressFormValues>();
 
     const onSubmit = async (data: AddressFormValues) => {
         try {
             const result = await createAddress(data); // Hace POST al backend
             if (result) {
-                alert("✅ Direccion creada con éxito");
-                reset();
+                Swal.fire({
+                    title: "Dirección creada con éxito",
+                    icon: "success", // Icono: "success", "error", "warning", "info", "question"
+                    confirmButtonText: "Aceptar",
+                    confirmButtonColor: "#28a745"
+                });
+                navigate("/list-address");
             } else {
-                alert("❌ Error al crear la Direccion");
+                Swal.fire({title:"Error al crear la Direccion", icon:"error", confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
             }
         } catch (error) {
-            alert("❌ Error inesperado");
+            Swal.fire({title:"Error inesperado", icon:"error", confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
             console.error(error);
         }
     };

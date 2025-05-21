@@ -1,7 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { createMotorcycle } from "../../services/motorcycleService"; // Ajusta la ruta si es necesario
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 interface MotorcycleFormValues {
     id: number;
     license_plate: string;
@@ -11,22 +12,23 @@ interface MotorcycleFormValues {
 }
 
 const CreateMotorcycle: React.FC = () => {
+  const navigate=useNavigate()
   const { register, handleSubmit, formState: { errors }, reset } = useForm<MotorcycleFormValues>();
 
-  const onSubmit = async (data: MotorcycleFormValues) => {
-    try {
-      const result = await createMotorcycle(data); // Hace POST al backend
-      if (result) {
-        alert("✅ Motocicleta creado con éxito");
-        reset();
-      } else {
-        alert("❌ Error al crear el Motocicleta");
-      }
-    } catch (error) {
-      alert("❌ Error inesperado");
-      console.error(error);
-    }
-  };
+ const onSubmit = async (data: MotorcycleFormValues) => {
+       try {
+         const result = await createMotorcycle(data); // Hace POST al backend
+         if (result) {
+           Swal.fire({title:"motocicleta creado con éxito",icon:"success",confirmButtonText:"Aceptar",confirmButtonColor: "#28a745"});
+           navigate("/list-motorcycles");
+         } else {
+           Swal.fire({title:"Error al crear el motocicleta", icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
+         }
+       } catch (error) {
+         Swal.fire({title:"Error inesperado",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
+         console.error(error);
+       }
+     };
 
   return (
     <div className="container mx-auto max-w-md mt-10 p-6 bg-white rounded shadow text-black">

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
 import { getAddressById, updateAddress } from "../../services/addressService";
 import { Address } from "../../models/Address";
+import Swal from "sweetalert2";
 
 const EditAddress: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,7 +18,7 @@ const EditAddress: React.FC = () => {
       if (!address) {
         navigate("/", { replace: true });
         setTimeout(() => {
-          alert("Dirección no encontrada");
+          Swal.fire({title:"Dirección no encontrada", icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
         }, 0);
         return;
       }
@@ -33,14 +34,14 @@ const EditAddress: React.FC = () => {
     try {
       const updated = await updateAddress(Number(id), data);
       if (updated) {
-        alert("Dirección actualizada con éxito");
-        navigate("/addresses");
+        Swal.fire({title:"Dirección actualizada con éxito",icon:"success",confirmButtonText:"Aceptar",confirmButtonColor: "#28a745"});
+        navigate("/list-address");
       } else {
-        alert("Error actualizando dirección");
+        Swal.fire({title:"Error actualizando dirección",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
       }
     } catch (error) {
       console.error("Error actualizando dirección:", error);
-      alert("Error actualizando dirección");
+      Swal.fire({title:"Error actualizando dirección",icon: "error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
     }
   };
 
