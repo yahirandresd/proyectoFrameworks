@@ -33,10 +33,11 @@ const CreateDriver= lazy(()=> import('../pages/Drivers/CreateDrivers'))
 const CreateIssue= lazy(()=> import('../pages/Issues/CreateIssue'))
 const CreateMenu= lazy(()=> import('../pages/Menu/CreateMenu'))
 const CreateMotorcycle= lazy(()=> import('../pages/Motorcycle/CreateMotorcycle'))
-
-
-
-
+const CreateOrder= lazy(()=> import('../pages/Orders/CreateOrders'))
+const CreatePhoto= lazy(()=> import('../pages/Photos/CreatePhotos'))
+const CreateProduct=lazy(()=> import('../pages/Products/CreateProduct'))
+const CreateRestaurant= lazy(()=> import('../pages/Restaurants/CreateRestaurant'))
+const CreateShift= lazy(()=>import('../pages/Shifts/CreateShift'))
 /*PROYECTO*/
 /*Actualizar*/
 const UpdateAddress= lazy(() => import('../pages/Address/UpdateAddress'))
@@ -45,6 +46,11 @@ const UpdateDriver= lazy(()=> import('../pages/Drivers/UpdateDrivers'))
 const UpdateIssue= lazy(()=> import('../pages/Issues/UpdateIssue'))
 const UpdateMenu= lazy(()=> import('../pages/Menu/UpdateMenu'))
 const UpdateMotorcycle= lazy(()=> import('../pages/Motorcycle/UpdateMotorcycle'))
+const UpdateOrder= lazy(()=> import('../pages/Orders/UpdateOrders'))
+const UpdatePhoto= lazy(()=> import('../pages/Photos/UpdatePhoto'))
+const UpdateProduct=lazy(()=> import('../pages/Products/UpdateProduct'))
+const UpdateRestaurant= lazy(()=> import('../pages/Restaurants/UpdateRestaurant'))
+const UpdateShift= lazy(()=>import('../pages/Shifts/UpdateShift'))
 
 
 const coreRoutes = [
@@ -52,6 +58,16 @@ const coreRoutes = [
     path: '/list-restaurants',
     title: 'Restaurantes',
     component: ListRestaurants,
+  },
+    {
+    path: '/create-restaurants',
+    title: 'CreateRestaurants',
+    component: CreateRestaurant,
+  },
+    {
+    path: '/update-restaurants',
+    title: 'UpdateRestaurants',
+    component: UpdateRestaurant,
   },
   {
     path: '/list-address',
@@ -149,9 +165,29 @@ const coreRoutes = [
     component: ListOrders,
   },
   {
+    path: '/create-orders',
+    title: 'CreateOrdens',
+    component: CreateOrder,
+  },
+  {
+    path: '/update-orders',
+    title: 'UpdateOrdens',
+    component: UpdateOrder,
+  },
+  {
     path: '/list-photos',
     title: 'Photos',
     component: ListPhotos,
+  },
+    {
+    path: '/create-photos',
+    title: 'CreatePhotos',
+    component: CreatePhoto,
+  },
+    {
+    path: '/update-photos',
+    title: 'UpdatePhotos',
+    component: UpdatePhoto,
   },
   {
     path: '/list-products',
@@ -159,9 +195,29 @@ const coreRoutes = [
     component: ListProducts,
   },
   {
+    path: '/create-products',
+    title: 'CreateProducts',
+    component: CreateProduct,
+  },
+  {
+    path: '/Update-products',
+    title: 'UpdateProducts',
+    component: UpdateProduct,
+  },
+  {
     path: '/list-shifts',
     title: 'Turnos',
     component: ListShifts,
+  },
+    {
+    path: '/create-shifts',
+    title: 'CreateShifts',
+    component: CreateShift,
+  },
+    {
+    path: '/update-shifts',
+    title: 'UpdateShifts',
+    component: UpdateShift,
   },
   {
     path: '/update-user/:id',
