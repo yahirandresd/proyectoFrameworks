@@ -1,5 +1,6 @@
 //
 // import { Component } from 'lucide-react';
+import { Map } from 'lucide-react';
 import { lazy } from 'react';
 
 const Calendar = lazy(() => import('../pages/Calendar'));
@@ -71,9 +72,14 @@ const ViewProduct = lazy(() => import("../pages/Products/ViewProduct"))
 const ViewRestaurant = lazy(() => import("../pages/Restaurants/ViewRestaurant"))
 const ViewShift = lazy(() => import("../pages/Shifts/ViewShift"))
 
-//const Mapa= lazy(()=> import('../components/Map/Map'))
+const Mapa= lazy(()=> import('../components/Map/Map'))
 
 const coreRoutes = [
+  {
+    path: "/map",
+    title: "ViewShift",
+    component: Mapa,
+  },
   {
     path: "/view-shift/:id",
     title: "ViewShift",

@@ -40,11 +40,7 @@ const CreateOrder: React.FC = () => {
           <input type="number"{...register("quantity", { required: true })} className="mt-1 block w-full border rounded p-2" />
           {errors.quantity && <p className="text-red-600">La cantidad es obligatoria</p>}
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Precio total</label>
-          <input type="number" {...register("total_price", { required: true })} className="mt-1 block w-full border rounded p-2" />
-          {errors.total_price && <p className="text-red-600">El precio es obligatorio</p>}
-        </div>
+      
         <div>
           <label className="block text-sm font-medium text-gray-700">Id motocicleta</label>
           <input type="number" {...register("motorcycle_id", { required: true })} className="mt-1 block w-full border rounded p-2" />
