@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TablaGenerica from "../TablaGenerica";
-import { Edit, Trash2 } from "lucide-react";
+import { Edit, Eye, Trash2 } from "lucide-react";
 import { getProducts, deleteProduct } from "../../services/productService";
 import { Product } from "../../models/Product";
 
@@ -26,8 +26,10 @@ const ListProducts: React.FC = () => {
   }, []);
 
   const handleAction = async (action: string, item: Product) => {
-    if (action === "edit") {
-      navigate(`/products/edit/${item.id}`);
+    if (action === "view") {
+      navigate(`/view-product/${item.id}`);
+    } else if (action === "edit") {
+      navigate(`/update-product/${item.id}`);
     } else if (action === "delete") {
       if (window.confirm(`¿Eliminar el producto "${item.name}"?`)) {
         try {
@@ -62,6 +64,11 @@ const ListProducts: React.FC = () => {
         datos={products}
         columnas={["id", "name", "description", "price", "category"]}
         acciones={[
+          {
+            nombre: "view",
+            etiqueta: "Ver",
+            icono: <Eye size={18} className="text-green-600" />,
+          },
           {
             nombre: "edit",
             etiqueta: "Editar",

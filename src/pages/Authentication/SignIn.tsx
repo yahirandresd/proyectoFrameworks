@@ -27,7 +27,6 @@ const SignIn: React.FC = () => {
   };
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      // tokenResponse.access_token contiene el token de Google
       try {
         const res = await fetch(
           'https://www.googleapis.com/oauth2/v3/userinfo',
@@ -38,18 +37,19 @@ const SignIn: React.FC = () => {
           },
         );
         const userInfo = await res.json();
-        console.log(userInfo);
 
-        // Guardar en localStorage
-        localStorage.setItem('user', JSON.stringify(userInfo));
-        localStorage.setItem('token', tokenResponse.access_token);
-        dispatch(setUser(userInfo)); // <-- ESTA LÍNEA ES CLAVE
-        navigate('/');
+        // Guarda todo el userInfo + el token juntos en localStorage
+        localStorage.setItem(
+          'user',
+          JSON.stringify({ ...userInfo, token: tokenResponse.access_token }),
+        );
 
-        console.log('Usuario de Google:', userInfo);
+        // Dispatch o lo que uses para el estado global
+        dispatch(setUser({ ...userInfo, token: tokenResponse.access_token }));
+
         navigate('/');
       } catch (error) {
-        console.error('Error al obtener información del usuario', error);
+        console.error('Error al obtener info usuario', error);
       }
     },
     onError: () => {

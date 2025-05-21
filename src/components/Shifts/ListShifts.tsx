@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TablaGenerica from "../TablaGenerica";
-import { Edit, Trash2 } from "lucide-react";
+import { Edit, Eye, Trash2 } from "lucide-react";
 import { getShifts, deleteShift } from "../../services/shiftService";
 import { Shift } from "../../models/Shift";
 
@@ -26,8 +26,10 @@ const ListShifts: React.FC = () => {
   }, []);
 
   const handleAction = async (action: string, item: Shift) => {
-    if (action === "edit") {
-      navigate(`/shifts/edit/${item.id}`);
+    if (action === "view") {
+      navigate(`/view-shift/${item.id}`);
+    } else if (action === "edit") {
+      navigate(`/update-shift/${item.id}`);
     } else if (action === "delete") {
       if (window.confirm(`¿Eliminar el turno desde "${item.start_time}" hasta "${item.end_time}"?`)) {
         try {
@@ -60,6 +62,11 @@ const ListShifts: React.FC = () => {
         datos={shifts}
         columnas={["id", "start_time", "end_time", "status", "driver_id", "motorcycle_id"]} 
         acciones={[
+          {
+            nombre: "view",
+            etiqueta: "Ver",
+            icono: <Eye size={18} className="text-green-600 dark:text-green-400" />,
+          },
           {
             nombre: "edit",
             etiqueta: "Editar",

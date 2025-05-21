@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TablaGenerica from "../TablaGenerica";
-import { Edit, Trash2 } from "lucide-react";
+import { Edit, Eye, Trash2 } from "lucide-react";
 import { getRestaurants, deleteRestaurant } from "../../services/restaurantService";
 import { Restaurant } from "../../models/Restaurant";
 
@@ -25,7 +25,9 @@ const ListRestaurants: React.FC = () => {
   }, []);
 
   const handleAction = async (action: string, item: Restaurant) => {
-    if (action === "edit") {
+    if (action === "view") {
+      navigate(`/view-restaurant/${item.id}`);
+    } else if (action === "edit") {
       navigate(`/update-restaurant/${item.id}`);
     } else if (action === "delete") {
       if (window.confirm(`¿Eliminar el restaurante "${item.name}"?`)) {
@@ -61,6 +63,11 @@ const ListRestaurants: React.FC = () => {
         datos={restaurants}
         columnas={["id", "name", "address", "phone", "email"]}
         acciones={[
+          {
+            nombre: "view",
+            etiqueta: "Ver",
+            icono: <Eye size={18} className="text-green-600" />,
+          },
           {
             nombre: "edit",
             etiqueta: "Editar",

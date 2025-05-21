@@ -28,9 +28,9 @@ const ListOrders: React.FC = () => {
 
   const handleAction = async (action: string, item: Order) => {
     if (action === "view") {
-      navigate(`/orders/view/${item.id}`);
+      navigate(`/view-orders/${item.id}`);
     } else if (action === "edit") {
-      navigate(`/orders/edit/${item.id}`);
+      navigate(`/edit-orders/${item.id}`);
     } else if (action === "delete") {
       const result = await Swal.fire({
         title: `¿Estás seguro?`,

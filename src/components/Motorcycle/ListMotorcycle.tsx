@@ -28,7 +28,7 @@ const ListMotorcycles: React.FC = () => {
 
   const handleAction = async (action: string, item: Motorcycle) => {
     if (action === "view") {
-      navigate(`/motorcycles/view/${item.id}`);
+      navigate(`/view-motorcycles/${item.id}`);
     } else if (action === "edit") {
       navigate(`/update-motorcycles/${item.id}`);
     } else if (action === "delete") {
