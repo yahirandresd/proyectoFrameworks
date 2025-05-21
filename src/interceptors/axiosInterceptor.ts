@@ -22,10 +22,13 @@ api.interceptors.request.use(
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+      console.log('🔐 Header enviado:', config.headers.Authorization);
     }
     return config;
+    
   },
   (error) => {
+    console.error('Error en la solicitud:', error);
     return Promise.reject(error);
   },
 );
