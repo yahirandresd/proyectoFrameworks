@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
 import { getUserById, updateUser } from "../../services/userService";
-
+import Swal from "sweetalert2";
 interface UserFormValues {
   name: string;
   email: string;
@@ -17,8 +17,8 @@ const EditUser: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { register, handleSubmit, reset } = useForm<UserFormValues>();
-  const [loading, ] = useState(true);
-  //const [alertShown, setAlertShown] = useState(false);
+  const [loading,] = useState(true);
+  //const [Swal.fireShown, setSwal.fireShown] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -26,10 +26,10 @@ const EditUser: React.FC = () => {
 
       const user = await getUserById(Number(id));
       if (!user) {
-        // Evita mostrar alert múltiples veces redireccionando primero
+        // Evita mostrar Swal.fire múltiples veces redireccionando primero
         navigate("/", { replace: true });
         setTimeout(() => {
-          alert("Usuario no encontrado");
+          Swal.fire({ title: "usuario no encontrada", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
         }, 0);
         return;
       }
@@ -52,14 +52,14 @@ const EditUser: React.FC = () => {
     try {
       const updated = await updateUser(Number(id), data);
       if (updated) {
-        alert("Usuario actualizado con éxito");
-        navigate("/users");
+        Swal.fire({ title: "usuario actualizado con éxito", icon: "success", confirmButtonText: "Aceptar", confirmButtonColor: "#28a745" });
+        navigate("/list-users");
       } else {
-        alert("Error actualizando usuario");
+        Swal.fire({ title: "Error actualizando usuario", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
       }
     } catch (error) {
       console.error("Error actualizando usuario:", error);
-      alert("Error actualizando usuario");
+      Swal.fire({ title: "Error actualizando usuario", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
     }
   };
 

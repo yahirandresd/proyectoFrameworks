@@ -1,7 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { createCustomer } from "../../services/customerService"; // Ajusta la ruta si es necesario
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 interface CustomerFormValues {
     id: number;
     name: string;
@@ -10,19 +11,20 @@ interface CustomerFormValues {
 }
 
 const CreateCustomer: React.FC = () => {
+    const navigate=useNavigate()
     const { register, handleSubmit, formState: { errors }, reset } = useForm<CustomerFormValues>();
 
     const onSubmit = async (data: CustomerFormValues) => {
         try {
             const result = await createCustomer(data); // Hace POST al backend
             if (result) {
-                alert("✅ Cliente creado con éxito");
-                reset();
+                Swal.fire({title:"Cliente creado con éxito",icon:"success",confirmButtonText:"Aceptar",confirmButtonColor: "#28a745"});
+                navigate("/list-customers");
             } else {
-                alert("❌ Error al crear el Cliente");
+                Swal.fire({title:"Error al crear el Cliente",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
             }
         } catch (error) {
-            alert("❌ Error inesperado");
+            Swal.fire({title:"Error inesperado",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
             console.error(error);
         }
     };
@@ -34,7 +36,7 @@ const CreateCustomer: React.FC = () => {
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Nombre</label>
                     <input type="name"{...register("name", { required: true })} className="mt-1 block w-full border rounded p-2" />
-                    {errors.name && <p className="text-red-600">El nombre es obligatoria</p>}
+                    {errors.name && <p className="text-red-600">El nombre es obligatorio</p>}
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Correo</label>

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
 import { getProductById, updateProduct } from "../../services/productService";
 import { Product } from "../../models/Product";
-
+import Swal from "sweetalert2";
 const EditProduct: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const EditProduct: React.FC = () => {
       if (!product) {
         navigate("/", { replace: true });
         setTimeout(() => {
-          alert("Producto no encontrado");
+          Swal.fire({ title: "producto no encontrada", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
         }, 0);
         return;
       }
@@ -33,14 +33,14 @@ const EditProduct: React.FC = () => {
     try {
       const updated = await updateProduct(Number(id), data);
       if (updated) {
-        alert("Producto actualizado con éxito");
-        navigate("/products");
+        Swal.fire({ title: "producto actualizado con éxito", icon: "success", confirmButtonText: "Aceptar", confirmButtonColor: "#28a745" });
+        navigate("/list-products");
       } else {
-        alert("Error actualizando producto");
+        Swal.fire({ title: "Error actualizando producto", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
       }
     } catch (error) {
       console.error("Error actualizando producto:", error);
-      alert("Error actualizando producto");
+      Swal.fire({ title: "Error actualizando producto", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
     }
   };
 

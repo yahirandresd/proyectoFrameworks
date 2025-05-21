@@ -1,7 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { createUser } from "../../services/userService"; // Ajusta la ruta si es necesario
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 interface UserFormValues {
   name: string;
   email: string;
@@ -13,19 +14,20 @@ interface UserFormValues {
 }
 
 const CreateUser: React.FC = () => {
+  const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors }, reset } = useForm<UserFormValues>();
 
   const onSubmit = async (data: UserFormValues) => {
     try {
       const result = await createUser(data); // Hace POST al backend
       if (result) {
-        alert("✅ Usuario creado con éxito");
-        reset();
+        Swal.fire({ title: "usuario creado con éxito", icon: "success", confirmButtonText: "Aceptar", confirmButtonColor: "#28a745" });
+        navigate("/list-users");
       } else {
-        alert("❌ Error al crear el usuario");
+        Swal.fire({ title: "Error al crear el usuario", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
       }
     } catch (error) {
-      alert("❌ Error inesperado");
+      Swal.fire({ title: "Error inesperado", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
       console.error(error);
     }
   };
@@ -36,7 +38,7 @@ const CreateUser: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">Nombre</label>
-          <input type ="name"{...register("name", { required: true })} className="mt-1 block w-full border rounded p-2" />
+          <input type="name"{...register("name", { required: true })} className="mt-1 block w-full border rounded p-2" />
           {errors.name && <p className="text-red-600">El nombre es obligatorio</p>}
         </div>
         <div>

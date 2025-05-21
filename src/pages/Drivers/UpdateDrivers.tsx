@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
 import { getDriverById, updateDriver } from "../../services/driverService";
 import { Driver } from "../../models/Driver";
-
+import Swal from "sweetalert2";
 const EditDriver: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const EditDriver: React.FC = () => {
       if (!driver) {
         navigate("/", { replace: true });
         setTimeout(() => {
-          alert("Conductor no encontrado");
+          Swal.fire({title:"Conductor no encontrado",icon: "error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
         }, 0);
         return;
       }
@@ -33,14 +33,14 @@ const EditDriver: React.FC = () => {
     try {
       const updated = await updateDriver(Number(id), data);
       if (updated) {
-        alert("Conductor actualizado con éxito");
-        navigate("/drivers");
+        Swal.fire({title:"Conductor actualizado con éxito",icon:"success",confirmButtonText:"Aceptar",confirmButtonColor: "#28a745"});
+        navigate("/list-drivers");
       } else {
-        alert("Error actualizando conductor");
+        Swal.fire({title:"Error actualizando conductor",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
       }
     } catch (error) {
       console.error("Error actualizando conductor:", error);
-      alert("Error actualizando conductor");
+      Swal.fire({title:"Error actualizando conductor",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
     }
   };
 
