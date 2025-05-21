@@ -46,8 +46,53 @@ const UpdateIssue= lazy(()=> import('../pages/Issues/UpdateIssue'))
 const UpdateMenu= lazy(()=> import('../pages/Menu/UpdateMenu'))
 const UpdateMotorcycle= lazy(()=> import('../pages/Motorcycle/UpdateMotorcycle'))
 
+/*PROYECTO*/
+/*ver*/
+const ViewMenu = lazy(() => import("../pages/Menu/viewMenu"))
+const ViewUser = lazy(() => import("../pages/Users/ViewUser"))
+const ViewMotorcycle = lazy(() => import("../pages/Motorcycle/ViewMotorcycle"))
+const ViewIssue = lazy(() => import("../pages/Issues/ViewIssue"))
+const ViewDriver = lazy(() => import("../pages/Drivers/ViewDriver"))
+const ViewCustomer = lazy(() => import("../pages/Customers/ViewCustomer"))
+const ViewAddress = lazy(() => import("../pages/Address/ViewAddress"))
+
 
 const coreRoutes = [
+  {
+    path: "/view-menus/:id",
+    title: "ViewMenu",
+    component: ViewMenu,
+  },
+  {
+    path: "/view-users/:id",
+    title: "ViewUser",
+    component: ViewUser,
+  },
+  {
+    path: "/view-motorcycles/:id",
+    title: "ViewMotorcycle",
+    component: ViewMotorcycle,
+  },
+  {
+    path: "/view-issues/:id",
+    title: "ViewIssue",
+    component: ViewIssue,
+  },
+  {
+    path: "/view-drivers/:id",
+    title: "ViewDriver",
+    component: ViewDriver,
+  },
+  {
+    path: "/view-customers/:id",
+    title: "ViewCustomer",
+    component: ViewCustomer,
+  },
+  {
+    path: "/view-addresses/:id",
+    title: "ViewAddress",
+    component: ViewAddress,
+  },
   {
     path: '/list-restaurants',
     title: 'Restaurantes',
