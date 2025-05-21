@@ -70,7 +70,7 @@ const ListIssues: React.FC = () => {
 
       <TablaGenerica<Issue>
         datos={issues}
-        columnas={["description", "issue_type", "date_reported", "status"]}
+        columnas={["description", "issue_type", "date_reported", "status", "motorcycle_id"]}
         formateadores={{
           date_reported: (value: Date) => new Date(value).toLocaleDateString(),
         }}

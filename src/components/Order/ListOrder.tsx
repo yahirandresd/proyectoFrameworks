@@ -74,7 +74,7 @@ const ListOrders: React.FC = () => {
 
       <TablaGenerica<Order>
         datos={orders}
-        columnas={["id", "quantity", "total_price", "status"]}
+        columnas={["id", "quantity", "total_price", "status", "motorcycle_id", "customer_id", "menu_id"]} 
         acciones={[
           {
             nombre: "view",

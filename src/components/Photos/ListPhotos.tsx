@@ -58,7 +58,7 @@ const ListPhotos: React.FC = () => {
 
       <TablaGenerica<Photo>
         datos={photos}
-        columnas={["id", "image_url", "caption", "taken_at"]}
+        columnas={["id", "image_url", "caption", "taken_at", "issue_id"]}
         acciones={[
           {
             nombre: "edit",

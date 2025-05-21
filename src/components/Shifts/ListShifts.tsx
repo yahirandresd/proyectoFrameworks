@@ -58,7 +58,7 @@ const ListShifts: React.FC = () => {
 
       <TablaGenerica
         datos={shifts}
-        columnas={["id", "start_time", "end_time", "status"]}
+        columnas={["id", "start_time", "end_time", "status", "driver_id", "motorcycle_id"]} 
         acciones={[
           {
             nombre: "edit",

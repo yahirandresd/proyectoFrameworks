@@ -71,7 +71,7 @@ const ListAddresses: React.FC = () => {
 
       <TablaGenerica<Address>
         datos={addresses}
-        columnas={["street", "city", "state", "postal_code"]}
+        columnas={["street", "city", "state", "postal_code", "additional_info", "order_id"]}
         acciones={[
           {
             nombre: "view",
