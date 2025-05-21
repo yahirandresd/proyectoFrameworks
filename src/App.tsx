@@ -10,6 +10,7 @@ import routes from './routes';
 import ProtectedRoute from "../src/components/Auth/ProtectedRoute";
 import DefaultLayoutNoAuth from './layout/DefaultLayoutNoAuth';
 import MapTracker from './pages/Map/PageMap' 
+import ChartsDashboard from './components/ChartDashboard';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
@@ -38,6 +39,8 @@ function App() {
 
         <Route element={<ProtectedRoute />}>
           <Route element={<DefaultLayout />}>
+        
+          <Route path="/grahpics" element={<ChartsDashboard />} />
             {/* Tu ruta fija para MapTracker */}
             <Route
               path="/map-tracker"
