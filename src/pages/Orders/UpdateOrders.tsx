@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
 import { getOrderById, updateOrder } from "../../services/orderService";
 import { Order } from "../../models/Order";
+import Swal from "sweetalert2";
 
 const EditOrder: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,7 +18,7 @@ const EditOrder: React.FC = () => {
       if (!order) {
         navigate("/", { replace: true });
         setTimeout(() => {
-          alert("Pedido no encontrado");
+         Swal.fire({title:"pedido no encontrado",icon: "error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
         }, 0);
         return;
       }
@@ -33,14 +34,14 @@ const EditOrder: React.FC = () => {
     try {
       const updated = await updateOrder(Number(id), data);
       if (updated) {
-        alert("Pedido actualizado con éxito");
-        navigate("/orders");
+        Swal.fire({title:"Orden actualizado con éxito",icon:"success",confirmButtonText:"Aceptar",confirmButtonColor: "#28a745"});
+        navigate("/list-Orders");
       } else {
-        alert("Error actualizando pedido");
+        Swal.fire({title:"Error actualizando Orden",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
       }
     } catch (error) {
-      console.error("Error actualizando pedido:", error);
-      alert("Error actualizando pedido");
+      console.error("Error actualizando Orden:", error);
+      Swal.fire({title:"Error actualizando Orden",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
     }
   };
 
@@ -61,7 +62,7 @@ const EditOrder: React.FC = () => {
           <input {...register("status")} className="mt-1 block w-full border rounded p-2" />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">ID de Motocicleta</label>
+          <label className="block text-sm font-medium text-gray-700">ID de Orden</label>
           <input type="number" {...register("motorcycle_id", { valueAsNumber: true })} className="mt-1 block w-full border rounded p-2" />
         </div>
         <div>

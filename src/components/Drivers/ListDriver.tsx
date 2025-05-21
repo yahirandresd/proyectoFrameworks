@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TablaGenerica from "../TablaGenerica";
-import { Edit, Trash2 } from "lucide-react";
+import { Edit, Eye, Trash2 } from "lucide-react";
 import { getDrivers, deleteDriver } from "../../services/driverService";
 import { Driver } from "../../models/Driver";
 import Swal from "sweetalert2";
@@ -26,7 +26,9 @@ const ListDrivers: React.FC = () => {
   }, []);
 
   const handleAction = async (action: string, item: Driver) => {
-    if (action === "edit") {
+    if (action === "view") {
+      navigate(`/view-driver/${item.id}`);
+    } else if (action === "edit") {
       navigate(`/update-customers/${item.id}`);
     } else if (action === "delete") {
       const result = await Swal.fire({
@@ -71,6 +73,11 @@ const ListDrivers: React.FC = () => {
         datos={drivers}
         columnas={["name", "license_number", "phone", "email", "status"]}
         acciones={[
+          {
+            nombre: "view",
+            etiqueta: "Ver",
+            icono: <Eye size={18} className="text-green-600" />,
+          },
           {
             nombre: "edit",
             etiqueta: "Editar",

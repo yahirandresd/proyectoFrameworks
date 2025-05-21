@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
 import { getMotorcycleById, updateMotorcycle } from "../../services/motorcycleService";
 import { Motorcycle } from "../../models/Motorcycle";
-
+import Swal from "sweetalert2";
 const EditMotorcycle: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const EditMotorcycle: React.FC = () => {
       if (!moto) {
         navigate("/", { replace: true });
         setTimeout(() => {
-          alert("Motocicleta no encontrada");
+          Swal.fire({title:"motocicleta no encontrado",icon: "error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
         }, 0);
         return;
       }
@@ -33,14 +33,14 @@ const EditMotorcycle: React.FC = () => {
     try {
       const updated = await updateMotorcycle(Number(id), data);
       if (updated) {
-        alert("Motocicleta actualizada con éxito");
-        navigate("/motorcycles");
+        Swal.fire({title:"Motocicleta actualizado con éxito",icon:"success",confirmButtonText:"Aceptar",confirmButtonColor: "#28a745"});
+        navigate("/list-Motorcycles");
       } else {
-        alert("Error actualizando motocicleta");
+        Swal.fire({title:"Error actualizando Motocicleta",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
       }
     } catch (error) {
-      console.error("Error actualizando motocicleta:", error);
-      alert("Error actualizando motocicleta");
+      console.error("Error actualizando Motorcycle:", error);
+      Swal.fire({title:"Error actualizando Motocicleta",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
     }
   };
 

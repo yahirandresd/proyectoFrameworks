@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
 import { getMenuById, updateMenu } from "../../services/menuService";
 import { Menu } from "../../models/Menu";
-
+import Swal from "sweetalert2";
 const EditMenu: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const EditMenu: React.FC = () => {
       if (!menu) {
         navigate("/", { replace: true });
         setTimeout(() => {
-          alert("Menú no encontrado");
+          Swal.fire({title:"menu no encontrado",icon: "error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
         }, 0);
         return;
       }
@@ -33,14 +33,14 @@ const EditMenu: React.FC = () => {
     try {
       const updated = await updateMenu(Number(id), data);
       if (updated) {
-        alert("Menú actualizado con éxito");
-        navigate("/menus");
+        Swal.fire({title:"Menu actualizado con éxito",icon:"success",confirmButtonText:"Aceptar",confirmButtonColor: "#28a745"});
+        navigate("/list-Menu");
       } else {
-        alert("Error actualizando menú");
+        Swal.fire({title:"Error actualizando Menu",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
       }
     } catch (error) {
-      console.error("Error actualizando menú:", error);
-      alert("Error actualizando menú");
+      console.error("Error actualizando Menu:", error);
+      Swal.fire({title:"Error actualizando Menu",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
     }
   };
 

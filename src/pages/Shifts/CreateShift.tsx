@@ -1,7 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { createShift } from "../../services/shiftService"; // Ajusta la ruta si es necesario
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 interface ShiftFormValues {
     start_time: Date;
     end_time: Date;
@@ -11,19 +12,20 @@ interface ShiftFormValues {
 }
 
 const CreateShift: React.FC = () => {
+    const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors }, reset } = useForm<ShiftFormValues>();
 
     const onSubmit = async (data: ShiftFormValues) => {
         try {
             const result = await createShift(data); // Hace POST al backend
             if (result) {
-                alert("✅ Turno creado con éxito");
-                reset();
+                Swal.fire({ title: "turno creado con éxito", icon: "success", confirmButtonText: "Aceptar", confirmButtonColor: "#28a745" });
+                navigate("/list-shifts");
             } else {
-                alert("❌ Error al crear el Turno");
+                Swal.fire({ title: "Error al crear el turno", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
             }
         } catch (error) {
-            alert("❌ Error inesperado");
+            Swal.fire({ title: "Error inesperado", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
             console.error(error);
         }
     };

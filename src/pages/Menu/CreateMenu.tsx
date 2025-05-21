@@ -1,8 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { createMenu } from "../../services/menuService"; // Ajusta la ruta si es necesario
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-interface UserFormValues {
+interface MenuFormValues {
     restaurant_id: number;
     product_id: number;
     price: number; // Usamos "number" para precios con decimales
@@ -10,22 +12,23 @@ interface UserFormValues {
 }
 
 const CreateMenu: React.FC = () => {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<UserFormValues>();
+  const navigate=useNavigate()
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<MenuFormValues>();
 
-  const onSubmit = async (data: UserFormValues) => {
-    try {
-      const result = await createMenu(data); // Hace POST al backend
-      if (result) {
-        alert("✅ Menu creado con éxito");
-        reset();
-      } else {
-        alert("❌ Error al crear el Menu");
+    const onSubmit = async (data: MenuFormValues) => {
+      try {
+        const result = await createMenu(data); // Hace POST al backend
+        if (result) {
+          Swal.fire({title:"Menu creado con éxito",icon:"success",confirmButtonText:"Aceptar",confirmButtonColor: "#28a745"});
+          navigate("/list-menu");
+        } else {
+          Swal.fire({title:"Error al crear el Menu", icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
+        }
+      } catch (error) {
+        Swal.fire({title:"Error inesperado",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
+        console.error(error);
       }
-    } catch (error) {
-      alert("❌ Error inesperado");
-      console.error(error);
-    }
-  };
+    };
 
   return (
     <div className="container mx-auto max-w-md mt-10 p-6 bg-white rounded shadow text-black">

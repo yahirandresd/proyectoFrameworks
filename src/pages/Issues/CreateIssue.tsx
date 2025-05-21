@@ -1,7 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { createIssue } from "../../services/issueService"; // Ajusta la ruta si es necesario
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 interface IssueFormValues {
     motorcycle_id: number;
     description: string;
@@ -11,19 +12,20 @@ interface IssueFormValues {
 }
 
 const CreateIssue: React.FC = () => {
+  const navigate= useNavigate()
   const { register, handleSubmit, formState: { errors }, reset } = useForm<IssueFormValues>();
 
   const onSubmit = async (data: IssueFormValues) => {
     try {
       const result = await createIssue(data); // Hace POST al backend
       if (result) {
-        alert("✅ Asunto creado con éxito");
-        reset();
+        Swal.fire({title:"Asunto creado con éxito",icon:"success",confirmButtonText:"Aceptar",confirmButtonColor: "#28a745"});
+        navigate("/list-issues");
       } else {
-        alert("❌ Error al crear el Asunto");
+        Swal.fire({title:"Error al crear el Asunto", icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
       }
     } catch (error) {
-      alert("❌ Error inesperado");
+      Swal.fire({title:"Error inesperado",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
       console.error(error);
     }
   };

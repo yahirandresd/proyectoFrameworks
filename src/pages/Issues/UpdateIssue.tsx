@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
 import { getIssueById, updateIssue } from "../../services/issueService";
 import { Issue } from "../../models/Issue";
+import Swal from "sweetalert2";
 
 const EditIssue: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,7 +18,7 @@ const EditIssue: React.FC = () => {
       if (!issue) {
         navigate("/", { replace: true });
         setTimeout(() => {
-          alert("Incidencia no encontrada");
+          Swal.fire({title:"asunto no encontrado",icon: "error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
         }, 0);
         return;
       }
@@ -35,18 +36,16 @@ const EditIssue: React.FC = () => {
   const onSubmit = async (data: Issue) => {
     if (!id) return;
     try {
-      // Convertir la fecha a tipo Date si viene como string desde el input
-      data.date_reported = new Date(data.date_reported);
       const updated = await updateIssue(Number(id), data);
       if (updated) {
-        alert("Incidencia actualizada con éxito");
-        navigate("/issues");
+        Swal.fire({title:"asunto actualizado con éxito",icon:"success",confirmButtonText:"Aceptar",confirmButtonColor: "#28a745"});
+        navigate("/list-Issues");
       } else {
-        alert("Error actualizando incidencia");
+        Swal.fire({title:"Error actualizando asunto",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
       }
     } catch (error) {
-      console.error("Error actualizando incidencia:", error);
-      alert("Error actualizando incidencia");
+      console.error("Error actualizando asunto:", error);
+      Swal.fire({title:"Error actualizando asunto",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
     }
   };
 

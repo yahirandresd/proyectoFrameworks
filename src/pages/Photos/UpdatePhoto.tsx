@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
 import { getPhotoById, updatePhoto } from "../../services/photoService";
 import { Photo } from "../../models/Photo";
-
+import Swal from "sweetalert2";
 const EditPhoto: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const EditPhoto: React.FC = () => {
       if (!photo) {
         navigate("/", { replace: true });
         setTimeout(() => {
-          alert("Foto no encontrada");
+          Swal.fire({title:"foto no encontrada",icon: "error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
         }, 0);
         return;
       }
@@ -40,16 +40,16 @@ const EditPhoto: React.FC = () => {
         taken_at: new Date(data.taken_at), // Convertimos el string ISO a Date
       };
       const updated = await updatePhoto(Number(id), payload);
-      if (updated) {
-        alert("Foto actualizada con éxito");
-        navigate("/photos");
-      } else {
-        alert("Error actualizando foto");
-      }
-    } catch (error) {
-      console.error("Error actualizando foto:", error);
-      alert("Error actualizando foto");
-    }
+          if (updated) {
+              Swal.fire({title:"foto actualizado con éxito",icon:"success",confirmButtonText:"Aceptar",confirmButtonColor: "#28a745"});
+              navigate("/list-photos");
+            } else {
+              Swal.fire({title:"Error actualizando foto",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
+            }
+          } catch (error) {
+            console.error("Error actualizando foto:", error);
+            Swal.fire({title:"Error actualizando foto",icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
+          }
   };
 
   return (

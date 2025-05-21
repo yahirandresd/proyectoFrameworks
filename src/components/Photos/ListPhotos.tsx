@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TablaGenerica from "../TablaGenerica";
-import { Edit, Trash2 } from "lucide-react";
+import { Edit, Eye, Trash2 } from "lucide-react";
 import { getPhotos, deletePhoto } from "../../services/photoService";
 import { Photo } from "../../models/Photo";
 
@@ -26,8 +26,10 @@ const ListPhotos: React.FC = () => {
   }, []);
 
   const handleAction = async (action: string, item: Photo) => {
-    if (action === "edit") {
-      navigate(`/photos/edit/${item.id}`);
+    if (action === "view") {
+      navigate(`/view-photo/${item.id}`);
+    } else if (action === "edit") {
+      navigate(`/update-photo/${item.id}`);
     } else if (action === "delete") {
       if (window.confirm(`¿Eliminar la foto con ID ${item.id}?`)) {
         try {
@@ -60,6 +62,11 @@ const ListPhotos: React.FC = () => {
         datos={photos}
         columnas={["id", "image_url", "caption", "taken_at", "issue_id"]}
         acciones={[
+          {
+            nombre: "view",
+            etiqueta: "Ver",
+            icono: <Eye size={18} className="text-green-600" />,
+          },
           {
             nombre: "edit",
             etiqueta: "Editar",
