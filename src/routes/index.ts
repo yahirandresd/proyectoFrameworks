@@ -1,3 +1,4 @@
+import { Component } from 'lucide-react';
 import { lazy } from 'react';
 
 const Calendar = lazy(() => import('../pages/Calendar'));
@@ -56,43 +57,9 @@ const ViewDriver = lazy(() => import("../pages/Drivers/ViewDriver"))
 const ViewCustomer = lazy(() => import("../pages/Customers/ViewCustomer"))
 const ViewAddress = lazy(() => import("../pages/Address/ViewAddress"))
 
+const Mapa= lazy(()=> import('../components/Map/Map'))
 
 const coreRoutes = [
-  {
-    path: "/view-menus/:id",
-    title: "ViewMenu",
-    component: ViewMenu,
-  },
-  {
-    path: "/view-users/:id",
-    title: "ViewUser",
-    component: ViewUser,
-  },
-  {
-    path: "/view-motorcycles/:id",
-    title: "ViewMotorcycle",
-    component: ViewMotorcycle,
-  },
-  {
-    path: "/view-issues/:id",
-    title: "ViewIssue",
-    component: ViewIssue,
-  },
-  {
-    path: "/view-drivers/:id",
-    title: "ViewDriver",
-    component: ViewDriver,
-  },
-  {
-    path: "/view-customers/:id",
-    title: "ViewCustomer",
-    component: ViewCustomer,
-  },
-  {
-    path: "/view-addresses/:id",
-    title: "ViewAddress",
-    component: ViewAddress,
-  },
   {
     path: '/list-restaurants',
     title: 'Restaurantes',
