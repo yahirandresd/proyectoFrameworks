@@ -8,6 +8,8 @@ import DropdownUser from './DropdownUser';
 import Navbar from './Navbar';
 import { useSelector } from 'react-redux';
 import { RootState } from '../stores/store';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // para redireccionar si es nec
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
@@ -15,6 +17,20 @@ const Header = (props: {
 }) => {
   const cartItems = 3; // ejemplo
   const user = useSelector((state: RootState) => state.user.user);
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!searchTerm.trim()) return;
+
+    // Puedes hacer una búsqueda local, API call o redirección
+    console.log('Buscar:', searchTerm);
+
+    // Ejemplo: redireccionar con query param
+    navigate(`/buscar?query=${encodeURIComponent(searchTerm)}`);
+  };
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
       <div className="flex flex-grow items-center justify-between py-4 px-4 shadow-2 md:px-6 2xl:px-11">
@@ -70,8 +86,7 @@ const Header = (props: {
         <div className="hidden sm:block p-4 rounded-full  w-full">
           <form
             className="max-w-md mx-auto"
-            action="https://formbold.com/s/unique_form_id"
-            method="POST"
+            action="/buscar"
           >
             <label
               htmlFor="default-search"
@@ -101,7 +116,7 @@ const Header = (props: {
                 type="search"
                 id="default-search"
                 name="search"
-                placeholder="Search Mockups, Logos..."
+                placeholder="Search Hamburguesas, Perros..."
                 required
                 className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 
                  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -126,7 +141,6 @@ const Header = (props: {
             {/* <!-- Notification Menu Area --> */}{' '}
             {/* <!-- Chat Notification Area --> */}
             {user && <DropdownNotification />}
-          
             {/* <!-- Notification Menu Area --> */}
           </ul>
 
