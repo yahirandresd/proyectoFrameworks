@@ -4,7 +4,7 @@ import { Motorcycle } from "../models/Motorcycle";
 // Obtener todas las motocicletas
 export const getMotorcycles = async (): Promise<Motorcycle[]> => {
     try {
-        const response = await api.get("/Motorcycles");
+        const response = await api.get("/motorcycles");
         return response.data;
     } catch (error) {
         console.error("Error al obtener motocicletas", error);

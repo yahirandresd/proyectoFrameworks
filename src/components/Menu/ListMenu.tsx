@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TablaGenerica from "../TablaGenerica";
-import { Edit, Trash2, CheckCircle, XCircle } from "lucide-react";
+import { Edit, Trash2, Eye, CheckCircle, XCircle } from "lucide-react";
 import { getMenus, deleteMenu } from "../../services/menuService";
 import { Menu } from "../../models/Menu";
 import Swal from "sweetalert2";
@@ -33,7 +33,9 @@ const ListMenus: React.FC = () => {
     const originalMenu = menus.find((m) => m.id === item.id);
     if (!originalMenu) return;
 
-    if (action === "edit") {
+    if (action === "view") {
+      navigate(`/view-menus/${originalMenu.id}`);
+    } else if (action === "edit") {
       navigate(`/update-menu/${originalMenu.id}`);
     } else if (action === "delete") {
       const result = await Swal.fire({
@@ -72,7 +74,7 @@ const ListMenus: React.FC = () => {
           onClick={() => navigate("/create-menu")}
           className="flex items-center bg-amarilloCanario hover:bg-yellow-500 text-white px-4 py-2 rounded shadow-sm transition duration-150 dark:bg-amarilloCanario dark:hover:bg-yellow-600"
         >
-           Crear Menú
+          Crear Menú
         </button>
       </div>
 
@@ -94,8 +96,13 @@ const ListMenus: React.FC = () => {
           restaurant_id: menu.restaurant_id ?? 0,
           product_id: menu.product_id ?? 0,
         }))}
-        columnas={["price" , "availability", "restaurant_id", "product_id"]}
+        columnas={["price", "availability", "restaurant_id", "product_id"]}
         acciones={[
+          {
+            nombre: "view",
+            etiqueta: "Ver",
+            icono: <Eye size={18} className="text-green-600" />,
+          },
           {
             nombre: "edit",
             etiqueta: "Editar",

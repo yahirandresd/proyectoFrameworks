@@ -1,4 +1,5 @@
-import { Component } from 'lucide-react';
+//
+// import { Component } from 'lucide-react';
 import { lazy } from 'react';
 
 const Calendar = lazy(() => import('../pages/Calendar'));
@@ -26,6 +27,8 @@ const ListPhotos = lazy(() => import('../components/Photos/ListPhotos'));
 const ListProducts = lazy(() => import('../components/Products/ListProducts'));
 const ListShifts = lazy(() => import('../components/Shifts/ListShifts'));
 const ListRestaurants = lazy(() => import('../components/Restaurants/ListRestaurants'));
+const ListUser = lazy(() => import('../components/Users/ListUsers'));
+
 /*PROYECTO*/
 /*Crear*/
 const CreateAddress= lazy(() => import('../pages/Address/CreateAddress'))
@@ -49,17 +52,82 @@ const UpdateMotorcycle= lazy(()=> import('../pages/Motorcycle/UpdateMotorcycle')
 
 /*PROYECTO*/
 /*ver*/
-const ViewMenu = lazy(() => import("../pages/Menu/viewMenu"))
+const ViewMenu = lazy(() => import("../pages/Menu/ViewMenu"))
 const ViewUser = lazy(() => import("../pages/Users/ViewUser"))
 const ViewMotorcycle = lazy(() => import("../pages/Motorcycle/ViewMotorcycle"))
 const ViewIssue = lazy(() => import("../pages/Issues/ViewIssue"))
 const ViewDriver = lazy(() => import("../pages/Drivers/ViewDriver"))
 const ViewCustomer = lazy(() => import("../pages/Customers/ViewCustomer"))
 const ViewAddress = lazy(() => import("../pages/Address/ViewAddress"))
+const ViewOrder = lazy(() => import("../pages/Orders/ViewOrder"))
+const ViewPhoto = lazy(() => import("../pages/Photos/ViewPhoto"))
+const ViewProduct = lazy(() => import("../pages/Products/ViewProduct"))
+const ViewRestaurant = lazy(() => import("../pages/Restaurants/ViewRestaurant"))
+const ViewShift = lazy(() => import("../pages/Shifts/ViewShift"))
 
-const Mapa= lazy(()=> import('../components/Map/Map'))
+//const Mapa= lazy(()=> import('../components/Map/Map'))
 
 const coreRoutes = [
+  {
+    path: "/view-shift/:id",
+    title: "ViewShift",
+    component: ViewShift,
+  },
+  {
+    path: "/view-restaurant/:id",
+    title: "ViewRestaurant",
+    component: ViewRestaurant,
+  },
+  {
+    path: "/view-product/:id",
+    title: "ViewProduct",
+    component: ViewProduct,
+  },
+  {
+    path: "/view-photo/:id",
+    title: "ViewPhoto",
+    component: ViewPhoto,
+  },
+  {
+    path: "/view-orders/:id",
+    title: "ViewOrder",
+    component: ViewOrder,
+  },
+  {
+    path: "/view-menus/:id",
+    title: "ViewMenu",
+    component: ViewMenu,
+  },
+  {
+    path: "/view-users/:id",
+    title: "ViewUser",
+    component: ViewUser,
+  },
+  {
+    path: "/view-motorcycles/:id",
+    title: "ViewMotorcycle",
+    component: ViewMotorcycle,
+  },
+  {
+    path: "/view-issues/:id",
+    title: "ViewIssue",
+    component: ViewIssue,
+  },
+  {
+    path: "/view-driver/:id",
+    title: "ViewDriver",
+    component: ViewDriver,
+  },
+  {
+    path: "/view-customers/:id",
+    title: "ViewCustomer",
+    component: ViewCustomer,
+  },
+  {
+    path: "/view-address/:id",
+    title: "ViewAddress",
+    component: ViewAddress,
+  },
   {
     path: '/list-restaurants',
     title: 'Restaurantes',
@@ -179,6 +247,11 @@ const coreRoutes = [
     path: '/update-user/:id',
     title: 'UpdateUser',
     component: UpdateUser,
+  },
+  {
+    path: '/list-user',
+    title: 'ListUser',
+    component: ListUser,
   },
   {
     path: '/create-user',
