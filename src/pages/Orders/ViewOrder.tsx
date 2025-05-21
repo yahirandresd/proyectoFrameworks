@@ -6,6 +6,7 @@ import { Order } from "../../models/Order";
 import Swal from "sweetalert2";
 import "sweetalert2/src/sweetalert2.scss";
 import { Eye } from "lucide-react";
+import MapOne from "../../components/Map/Map";
 
 const ViewOrder: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -133,6 +134,9 @@ const ViewOrder: React.FC = () => {
       >
         Volver
       </button>
+      <br />
+      <br />
+      <MapOne motorcycleId={order.motorcycle_id} />
     </div>
   );
 };

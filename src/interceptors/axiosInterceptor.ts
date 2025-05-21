@@ -18,7 +18,6 @@ api.interceptors.request.use(
     }
     // Agregar token si la ruta no está excluida
     const token = user['token'];
-    console.log('🔐 Header enviado:', config.headers.Authorization);
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

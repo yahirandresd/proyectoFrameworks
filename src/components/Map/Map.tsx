@@ -12,7 +12,8 @@ import { io } from 'socket.io-client';
 import 'leaflet/dist/leaflet.css';
 
 const motorcycleIcon = new L.Icon({
-  iconUrl: 'https://png.pngtree.com/recommend-works/png-clipart/20250101/ourmid/pngtree-orange-delivery-man-on-motorcycle-png-image_15017922.png',
+  iconUrl:
+    'https://png.pngtree.com/recommend-works/png-clipart/20250101/ourmid/pngtree-orange-delivery-man-on-motorcycle-png-image_15017922.png',
   iconSize: [52, 52],
 });
 
@@ -29,38 +30,51 @@ const FollowMarker = ({ position }: { position: Coordinate }) => {
   return null;
 };
 
-const MotorcycleTracker = () => {
+const MotorcycleTracker = ({ motorcycleId }: { motorcycleId: number }) => {
   const [position, setPosition] = useState<Coordinate>({ lat: 5.064, lng: -75.496 });
+  const [licensePlate, setLicensePlate] = useState<string | null>(null);
 
   useEffect(() => {
-    // Inicia el seguimiento cuando el componente se monta
-    axios.post('http://localhost:5000/motorcycles/track/ABC124').catch(err => {
+    // Obtener placa desde el backend
+    axios.get(`http://localhost:5000/motorcycles/${motorcycleId}`)
+      .then(res => {
+        setLicensePlate(res.data.license_plate);
+      })
+      .catch(err => {
+        console.error('Error obteniendo placa:', err.message);
+      });
+  }, [motorcycleId]);
+
+  useEffect(() => {
+    if (!licensePlate) return;
+
+    axios.post(`http://localhost:5000/motorcycles/track/${licensePlate}`).catch(err => {
       console.error('Error iniciando seguimiento:', err.message);
     });
 
-    // Conectar socket.io
     const socket = io('http://localhost:5000');
-    socket.on('ABC124', (coord: Coordinate) => {
+    socket.on(licensePlate, (coord: Coordinate) => {
       if (coord.lat && coord.lng) {
         setPosition(coord);
       }
     });
 
-    // Al desmontar el componente: parar seguimiento y desconectar socket
     return () => {
-      axios.post('http://localhost:5000/motorcycles/stop/ABC124').catch(err => {
+      axios.post(`http://localhost:5000/motorcycles/stop/${licensePlate}`).catch(err => {
         console.error('Error deteniendo seguimiento:', err.message);
       });
       socket.disconnect();
     };
-  }, []);
+  }, [licensePlate]);
+
+  if (!licensePlate) return <p>Cargando mapa...</p>;
 
   return (
     <div className="w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] xl:h-[800px]">
       <MapContainer center={position} zoom={15} className="w-full h-full">
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <Marker position={position} icon={motorcycleIcon}>
-          <Popup>Motocicleta ABC124</Popup>
+          <Popup>Motocicleta {licensePlate}</Popup>
         </Marker>
         <FollowMarker position={position} />
       </MapContainer>

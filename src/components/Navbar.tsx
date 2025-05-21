@@ -1,25 +1,23 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import { date } from "yup";
 
-const socket = io("http://localhost:5000"); // Ajusta la URL de tu backend
+const socket = io("http://localhost:5000"); // URL de tu backend con Socket.IO
 
 const Navbar = () => {
   const [notifications, setNotifications] = useState(0);
 
   useEffect(() => {
-    socket.on("new_notification", (data) => {
-        console.log("Nueva notificacion", JSON.stringify(data))
-      setNotifications((prev) => prev + 1);
-    });
+    
 
-    return () => {  
+
+    // Cleanup al desmontar componente
+    return () => {
       socket.off("new_notification");
     };
   }, []);
 
   return (
-    <nav className="p-4 bg-blue-600 text-white flex justify-between">
+    <nav className="p-4  text-white flex justify-between">
       <div className="relative">
         <button className="relative">
           🔔 Notificaciones
