@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import TablaGenerica from "../TablaGenerica";
-import { Edit, Trash2 } from "lucide-react";
+import { Edit, Eye, Trash2 } from "lucide-react";
 import { getIssues, deleteIssue } from "../../services/issueService";
 import { Issue } from "../../models/Issue";
 import Swal from "sweetalert2";
@@ -27,7 +27,9 @@ const ListIssues: React.FC = () => {
   }, []);
 
   const handleAction = async (action: string, item: Issue) => {
-    if (action === "edit") {
+    if (action === "view") {
+      navigate(`/view-issues/${item.id}`);
+    } else if (action === "edit") {
       navigate(`/update-issues/${item.id}`);
     } else if (action === "delete") {
       const result = await Swal.fire({
@@ -75,6 +77,11 @@ const ListIssues: React.FC = () => {
           date_reported: (value: Date) => new Date(value).toLocaleDateString(),
         }}
         acciones={[
+          {
+            nombre: "view",
+            etiqueta: "Ver",
+            icono: <Eye size={18} className="text-green-600" />,  
+          },
           {
             nombre: "edit",
             etiqueta: "Editar",

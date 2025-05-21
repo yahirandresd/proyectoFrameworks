@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
 import { getRestaurantById, updateRestaurant } from "../../services/restaurantService";
 import { Restaurant } from "../../models/Restaurant";
+import Swal from "sweetalert2";
 
 const EditRestaurant: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,7 +18,7 @@ const EditRestaurant: React.FC = () => {
       if (!restaurant) {
         navigate("/", { replace: true });
         setTimeout(() => {
-          alert("Restaurante no encontrado");
+          Swal.fire({ title: "restaurante no encontrada", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
         }, 0);
         return;
       }
@@ -33,14 +34,14 @@ const EditRestaurant: React.FC = () => {
     try {
       const updated = await updateRestaurant(Number(id), data);
       if (updated) {
-        alert("Restaurante actualizado con éxito");
-        navigate("/restaurants");
+        Swal.fire({ title: "restaurante actualizado con éxito", icon: "success", confirmButtonText: "Aceptar", confirmButtonColor: "#28a745" });
+        navigate("/list-restaurants");
       } else {
-        alert("Error actualizando restaurante");
+        Swal.fire({ title: "Error actualizando restaurante", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
       }
     } catch (error) {
       console.error("Error actualizando restaurante:", error);
-      alert("Error actualizando restaurante");
+      Swal.fire({ title: "Error actualizando restaurante", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
     }
   };
 

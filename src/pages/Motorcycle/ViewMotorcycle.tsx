@@ -1,7 +1,10 @@
+// src/pages/Motorcycle/ViewMotorcycle.tsx
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getMotorcycleById } from "../../services/motorcycleService";
 import { Motorcycle } from "../../models/Motorcycle";
+import Swal from "sweetalert2";
+import "sweetalert2/src/sweetalert2.scss";
 import { CheckCircle, XCircle } from "lucide-react";
 
 const ViewMotorcycle: React.FC = () => {
@@ -12,31 +15,52 @@ const ViewMotorcycle: React.FC = () => {
 
   useEffect(() => {
     if (!id) return;
-    getMotorcycleById(Number(id)).then(data => {
-      setMotorcycle(data);
-      setLoading(false);
+
+    Swal.fire({
+      title: "Cargando motocicleta...",
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
     });
-  }, [id]);
 
-  if (loading)
-    return (
-      <div className="flex justify-center items-center h-48 text-gray-600">
-        Cargando motocicleta...
-      </div>
-    );
+    getMotorcycleById(Number(id))
+      .then((data) => {
+        if (!data) {
+          Swal.fire({
+            icon: "error",
+            title: "No encontrado",
+            text: "No se encontró la motocicleta.",
+            confirmButtonText: "Volver",
+            confirmButtonColor: "#3085d6",
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate(-1);
+            }
+          });
+        } else {
+          setMotorcycle(data);
+          Swal.close();
+        }
+      })
+      .catch(() => {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Ocurrió un error al cargar la motocicleta.",
+          confirmButtonText: "Volver",
+          confirmButtonColor: "#d33",
+        }).then(() => navigate(-1));
+      })
+      .finally(() => setLoading(false));
+  }, [id, navigate]);
 
-  if (!motorcycle)
-    return (
-      <div className="text-center text-red-500">
-        No se encontró la motocicleta.
-        <button
-          onClick={() => navigate(-1)}
-          className="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-        >
-          Volver
-        </button>
-      </div>
-    );
+  if (loading) return null; // Loading mostrado con Swal
+
+  if (!motorcycle) return null; // No encontrado mostrado con Swal
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-md rounded p-6 mt-8">

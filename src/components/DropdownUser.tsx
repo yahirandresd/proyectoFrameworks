@@ -14,7 +14,6 @@ const DropdownUser = () => {
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
-  console.log(userLocal?.picture)
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {

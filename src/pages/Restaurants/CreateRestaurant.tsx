@@ -1,7 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { createRestaurant } from "../../services/restaurantService"; // Ajusta la ruta si es necesario
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 interface RestaurantFormValues {
     name: string;
     address: string;
@@ -10,19 +11,20 @@ interface RestaurantFormValues {
 }
 
 const CreateRestaurant: React.FC = () => {
+    const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors }, reset } = useForm<RestaurantFormValues>();
 
     const onSubmit = async (data: RestaurantFormValues) => {
         try {
             const result = await createRestaurant(data); // Hace POST al backend
             if (result) {
-                alert("✅ Restaurante creado con éxito");
-                reset();
+                Swal.fire({ title: "restaurante creado con éxito", icon: "success", confirmButtonText: "Aceptar", confirmButtonColor: "#28a745" });
+                navigate("/list-restaurants");
             } else {
-                alert("❌ Error al crear el Restaurante");
+                Swal.fire({ title: "Error al crear el restaurante", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
             }
         } catch (error) {
-            alert("❌ Error inesperado");
+            Swal.fire({ title: "Error inesperado", icon: "error", confirmButtonText: "Aceptar", confirmButtonColor: "#dc3545" });
             console.error(error);
         }
     };

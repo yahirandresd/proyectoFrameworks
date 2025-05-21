@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
 import { getCustomerById, updateCustomer } from "../../services/customerService";
 import { Customer } from "../../models/Customer";
+import Swal from "sweetalert2";
 
 const EditCustomer: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,7 +18,7 @@ const EditCustomer: React.FC = () => {
       if (!customer) {
         navigate("/", { replace: true });
         setTimeout(() => {
-          alert("Cliente no encontrado");
+          Swal.fire({title:"Cliente no encontrado", icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
         }, 0);
         return;
       }
@@ -33,14 +34,14 @@ const EditCustomer: React.FC = () => {
     try {
       const updated = await updateCustomer(Number(id), data);
       if (updated) {
-        alert("Cliente actualizado con éxito");
-        navigate("/customers");
+        Swal.fire({title:"Cliente actualizado con éxito", icon:"success",confirmButtonText:"Aceptar",confirmButtonColor:"#28a745"});
+        navigate("/list-customers");
       } else {
-        alert("Error actualizando cliente");
+        Swal.fire({title:"Error actualizando cliente", icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
       }
     } catch (error) {
       console.error("Error actualizando cliente:", error);
-      alert("Error actualizando cliente");
+      Swal.fire({title:"Error actualizando cliente",icon: "error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
     }
   };
 

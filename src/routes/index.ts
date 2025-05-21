@@ -1,4 +1,5 @@
-import { Component } from 'lucide-react';
+//
+// import { Component } from 'lucide-react';
 import { lazy } from 'react';
 
 const Calendar = lazy(() => import('../pages/Calendar'));
@@ -26,6 +27,8 @@ const ListPhotos = lazy(() => import('../components/Photos/ListPhotos'));
 const ListProducts = lazy(() => import('../components/Products/ListProducts'));
 const ListShifts = lazy(() => import('../components/Shifts/ListShifts'));
 const ListRestaurants = lazy(() => import('../components/Restaurants/ListRestaurants'));
+const ListUser = lazy(() => import('../components/Users/ListUsers'));
+
 /*PROYECTO*/
 /*Crear*/
 const CreateAddress= lazy(() => import('../pages/Address/CreateAddress'))
@@ -34,10 +37,11 @@ const CreateDriver= lazy(()=> import('../pages/Drivers/CreateDrivers'))
 const CreateIssue= lazy(()=> import('../pages/Issues/CreateIssue'))
 const CreateMenu= lazy(()=> import('../pages/Menu/CreateMenu'))
 const CreateMotorcycle= lazy(()=> import('../pages/Motorcycle/CreateMotorcycle'))
-
-
-
-
+const CreateOrder= lazy(()=> import('../pages/Orders/CreateOrders'))
+const CreatePhoto= lazy(()=> import('../pages/Photos/CreatePhotos'))
+const CreateProduct=lazy(()=> import('../pages/Products/CreateProduct'))
+const CreateRestaurant= lazy(()=> import('../pages/Restaurants/CreateRestaurant'))
+const CreateShift= lazy(()=>import('../pages/Shifts/CreateShift'))
 /*PROYECTO*/
 /*Actualizar*/
 const UpdateAddress= lazy(() => import('../pages/Address/UpdateAddress'))
@@ -46,24 +50,104 @@ const UpdateDriver= lazy(()=> import('../pages/Drivers/UpdateDrivers'))
 const UpdateIssue= lazy(()=> import('../pages/Issues/UpdateIssue'))
 const UpdateMenu= lazy(()=> import('../pages/Menu/UpdateMenu'))
 const UpdateMotorcycle= lazy(()=> import('../pages/Motorcycle/UpdateMotorcycle'))
+const UpdateOrder= lazy(()=> import('../pages/Orders/UpdateOrders'))
+const UpdatePhoto= lazy(()=> import('../pages/Photos/UpdatePhoto'))
+const UpdateProduct=lazy(()=> import('../pages/Products/UpdateProduct'))
+const UpdateRestaurant= lazy(()=> import('../pages/Restaurants/UpdateRestaurant'))
+const UpdateShift= lazy(()=>import('../pages/Shifts/UpdateShift'))
 
 /*PROYECTO*/
 /*ver*/
-const ViewMenu = lazy(() => import("../pages/Menu/viewMenu"))
+const ViewMenu = lazy(() => import("../pages/Menu/ViewMenu"))
 const ViewUser = lazy(() => import("../pages/Users/ViewUser"))
 const ViewMotorcycle = lazy(() => import("../pages/Motorcycle/ViewMotorcycle"))
 const ViewIssue = lazy(() => import("../pages/Issues/ViewIssue"))
 const ViewDriver = lazy(() => import("../pages/Drivers/ViewDriver"))
 const ViewCustomer = lazy(() => import("../pages/Customers/ViewCustomer"))
 const ViewAddress = lazy(() => import("../pages/Address/ViewAddress"))
+const ViewOrder = lazy(() => import("../pages/Orders/ViewOrder"))
+const ViewPhoto = lazy(() => import("../pages/Photos/ViewPhoto"))
+const ViewProduct = lazy(() => import("../pages/Products/ViewProduct"))
+const ViewRestaurant = lazy(() => import("../pages/Restaurants/ViewRestaurant"))
+const ViewShift = lazy(() => import("../pages/Shifts/ViewShift"))
 
-const Mapa= lazy(()=> import('../components/Map/Map'))
+//const Mapa= lazy(()=> import('../components/Map/Map'))
 
 const coreRoutes = [
+  {
+    path: "/view-shift/:id",
+    title: "ViewShift",
+    component: ViewShift,
+  },
+  {
+    path: "/view-restaurant/:id",
+    title: "ViewRestaurant",
+    component: ViewRestaurant,
+  },
+  {
+    path: "/view-product/:id",
+    title: "ViewProduct",
+    component: ViewProduct,
+  },
+  {
+    path: "/view-photo/:id",
+    title: "ViewPhoto",
+    component: ViewPhoto,
+  },
+  {
+    path: "/view-orders/:id",
+    title: "ViewOrder",
+    component: ViewOrder,
+  },
+  {
+    path: "/view-menus/:id",
+    title: "ViewMenu",
+    component: ViewMenu,
+  },
+  {
+    path: "/view-users/:id",
+    title: "ViewUser",
+    component: ViewUser,
+  },
+  {
+    path: "/view-motorcycles/:id",
+    title: "ViewMotorcycle",
+    component: ViewMotorcycle,
+  },
+  {
+    path: "/view-issues/:id",
+    title: "ViewIssue",
+    component: ViewIssue,
+  },
+  {
+    path: "/view-driver/:id",
+    title: "ViewDriver",
+    component: ViewDriver,
+  },
+  {
+    path: "/view-customers/:id",
+    title: "ViewCustomer",
+    component: ViewCustomer,
+  },
+  {
+    path: "/view-address/:id",
+    title: "ViewAddress",
+    component: ViewAddress,
+  },
   {
     path: '/list-restaurants',
     title: 'Restaurantes',
     component: ListRestaurants,
+  },
+    {
+    path: '/create-restaurants',
+    title: 'CreateRestaurants',
+    component: CreateRestaurant,
+  },
+    {
+    path: '/update-restaurants',
+    title: 'UpdateRestaurants',
+    component: UpdateRestaurant,
   },
   {
     path: '/list-address',
@@ -161,9 +245,29 @@ const coreRoutes = [
     component: ListOrders,
   },
   {
+    path: '/create-orders',
+    title: 'CreateOrdens',
+    component: CreateOrder,
+  },
+  {
+    path: '/update-orders',
+    title: 'UpdateOrdens',
+    component: UpdateOrder,
+  },
+  {
     path: '/list-photos',
     title: 'Photos',
     component: ListPhotos,
+  },
+    {
+    path: '/create-photos',
+    title: 'CreatePhotos',
+    component: CreatePhoto,
+  },
+    {
+    path: '/update-photos',
+    title: 'UpdatePhotos',
+    component: UpdatePhoto,
   },
   {
     path: '/list-products',
@@ -171,14 +275,39 @@ const coreRoutes = [
     component: ListProducts,
   },
   {
+    path: '/create-products',
+    title: 'CreateProducts',
+    component: CreateProduct,
+  },
+  {
+    path: '/Update-products',
+    title: 'UpdateProducts',
+    component: UpdateProduct,
+  },
+  {
     path: '/list-shifts',
     title: 'Turnos',
     component: ListShifts,
+  },
+    {
+    path: '/create-shifts',
+    title: 'CreateShifts',
+    component: CreateShift,
+  },
+    {
+    path: '/update-shifts',
+    title: 'UpdateShifts',
+    component: UpdateShift,
   },
   {
     path: '/update-user/:id',
     title: 'UpdateUser',
     component: UpdateUser,
+  },
+  {
+    path: '/list-user',
+    title: 'ListUser',
+    component: ListUser,
   },
   {
     path: '/create-user',

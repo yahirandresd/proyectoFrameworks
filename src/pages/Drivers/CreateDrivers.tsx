@@ -1,7 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { createDriver } from "../../services/driverService"; // Ajusta la ruta si es necesario
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 interface DriverFormValues {
     id: number;
     name: string;
@@ -12,19 +13,20 @@ interface DriverFormValues {
 }
 
 const CreateDriver: React.FC = () => {
+    const navigate=useNavigate()
     const { register, handleSubmit, formState: { errors }, reset } = useForm<DriverFormValues>();
 
     const onSubmit = async (data: DriverFormValues) => {
         try {
             const result = await createDriver(data); // Hace POST al backend
             if (result) {
-                alert("✅ Conductor creado con éxito");
-                reset();
+                Swal.fire({title:"Conductor creado con éxito",icon:"success",confirmButtonText:"Aceptar",confirmButtonColor: "#28a745"});
+                navigate("/list-drivers");
             } else {
-                alert("❌ Error al crear el C");
+                Swal.fire({title:"Error al crear el Conductor", icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
             }
         } catch (error) {
-            alert("❌ Error inesperado");
+            Swal.fire({title:"Error inesperado", icon:"error",confirmButtonText:"Aceptar",confirmButtonColor: "#dc3545"});
             console.error(error);
         }
     };
