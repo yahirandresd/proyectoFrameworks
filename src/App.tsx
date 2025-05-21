@@ -40,7 +40,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route element={<DefaultLayout />}>
         
-          <Route path="/grahpics" element={<ChartsDashboard />} />
+          <Route path="/graphics" element={<ChartsDashboard />} />
             {/* Tu ruta fija para MapTracker */}
             <Route
               path="/map-tracker"
