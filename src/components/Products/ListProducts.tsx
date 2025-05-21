@@ -29,7 +29,7 @@ const ListProducts: React.FC = () => {
     if (action === "view") {
       navigate(`/view-product/${item.id}`);
     } else if (action === "edit") {
-      navigate(`/update-product/${item.id}`);
+      navigate(`/update-products/${item.id}`);
     } else if (action === "delete") {
       if (window.confirm(`¿Eliminar el producto "${item.name}"?`)) {
         try {
@@ -53,7 +53,7 @@ const ListProducts: React.FC = () => {
           Lista de Productos
         </h2>
         <button
-          onClick={() => navigate("/create-product")}
+          onClick={() => navigate("/create-products")}
           className="flex items-center bg-amarilloCanario hover:bg-yellow-500 text-white px-4 py-2 rounded shadow-sm transition duration-150 dark:bg-amarilloCanario dark:hover:bg-yellow-600"
         >
            Crear Producto
