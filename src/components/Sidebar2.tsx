@@ -617,7 +617,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               </li>
                               <li>
                                 <NavLink
-                                  to="/forms/form-elements"
+                                  to="/list-drivers"
                                   className={({ isActive }) =>
                                     'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                     (isActive && '!text-white')
@@ -628,7 +628,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               </li>
                               <li>
                                 <NavLink
-                                  to="/forms/form-elements"
+                                  to="/list-issues"
                                   className={({ isActive }) =>
                                     'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                     (isActive && '!text-white')
@@ -639,7 +639,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               </li>
                               <li>
                                 <NavLink
-                                  to="/forms/form-elements"
+                                  to="/list-menu"
                                   className={({ isActive }) =>
                                     'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                     (isActive && '!text-white')
@@ -650,7 +650,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               </li>
                               <li>
                                 <NavLink
-                                  to="/forms/form-elements"
+                                  to="/list-motorcycles"
                                   className={({ isActive }) =>
                                     'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                     (isActive && '!text-white')
@@ -661,7 +661,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               </li>
                               <li>
                                 <NavLink
-                                  to="/forms/form-elements"
+                                  to="/list-orders"
                                   className={({ isActive }) =>
                                     'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                     (isActive && '!text-white')
@@ -672,7 +672,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               </li>
                               <li>
                                 <NavLink
-                                  to="/forms/form-elements"
+                                  to="/list-products"
                                   className={({ isActive }) =>
                                     'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                     (isActive && '!text-white')
@@ -683,7 +683,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               </li>
                               <li>
                                 <NavLink
-                                  to="/forms/form-elements"
+                                  to="/list-restaurants"
                                   className={({ isActive }) =>
                                     'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
                                     (isActive && '!text-white')

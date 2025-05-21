@@ -1,3 +1,4 @@
+import { Component } from 'lucide-react';
 import { lazy } from 'react';
 
 const Calendar = lazy(() => import('../pages/Calendar'));
@@ -52,6 +53,17 @@ const UpdateProduct=lazy(()=> import('../pages/Products/UpdateProduct'))
 const UpdateRestaurant= lazy(()=> import('../pages/Restaurants/UpdateRestaurant'))
 const UpdateShift= lazy(()=>import('../pages/Shifts/UpdateShift'))
 
+/*PROYECTO*/
+/*ver*/
+const ViewMenu = lazy(() => import("../pages/Menu/ViewMenu"))
+const ViewUser = lazy(() => import("../pages/Users/ViewUser"))
+const ViewMotorcycle = lazy(() => import("../pages/Motorcycle/ViewMotorcycle"))
+const ViewIssue = lazy(() => import("../pages/Issues/ViewIssue"))
+const ViewDriver = lazy(() => import("../pages/Drivers/ViewDriver"))
+const ViewCustomer = lazy(() => import("../pages/Customers/ViewCustomer"))
+const ViewAddress = lazy(() => import("../pages/Address/ViewAddress"))
+
+const Mapa= lazy(()=> import('../components/Map/Map'))
 
 const coreRoutes = [
   {
