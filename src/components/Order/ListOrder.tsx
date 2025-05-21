@@ -28,20 +28,25 @@ const ListOrders: React.FC = () => {
 
   const handleAction = async (action: string, item: Order) => {
     if (action === "view") {
-      navigate(`/view-orders/${item.id}`);
+      navigate(`/view-order/${item.id}`);
     } else if (action === "edit") {
-      navigate(`/edit-orders/${item.id}`);
+      navigate(`/update-order/${item.id}`);
     } else if (action === "delete") {
       const result = await Swal.fire({
         title: `¿Estás seguro?`,
         text: `Eliminar la orden #${item.id}`,
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#3085d6",
         confirmButtonText: "Sí, eliminar",
         cancelButtonText: "Cancelar",
+        customClass: {
+          confirmButton: 'swal2-confirm-btn',
+          cancelButton: 'swal2-cancel-btn'
+        },
+        buttonsStyling: false // para que use nuestros estilos y no los predeterminados
       });
+      
+      
 
       if (result.isConfirmed) {
         try {

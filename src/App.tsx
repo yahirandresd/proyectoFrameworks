@@ -7,10 +7,11 @@ import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
 import Loader from './common/Loader';
 import routes from './routes';
-import ProtectedRoute from "../src/components/Auth/ProtectedRoute";
+import ProtectedRoute from '../src/components/Auth/ProtectedRoute';
 import DefaultLayoutNoAuth from './layout/DefaultLayoutNoAuth';
-import MapTracker from './pages/Map/PageMap' 
+import MapTracker from './pages/Map/PageMap';
 import ChartsDashboard from './components/ChartDashboard';
+import NewOrderAlert from './components/NewOrderAlert';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
@@ -25,6 +26,7 @@ function App() {
     <Loader />
   ) : (
     <>
+      <NewOrderAlert /> {/* Aquí, arriba de todo */}
       <Toaster
         position="top-right"
         reverseOrder={false}
@@ -39,8 +41,7 @@ function App() {
 
         <Route element={<ProtectedRoute />}>
           <Route element={<DefaultLayout />}>
-        
-          <Route path="/graphics" element={<ChartsDashboard />} />
+            <Route path="/graphics" element={<ChartsDashboard />} />
             {/* Tu ruta fija para MapTracker */}
             <Route
               path="/map-tracker"

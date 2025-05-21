@@ -95,7 +95,7 @@ const coreRoutes = [
     component: ViewPhoto,
   },
   {
-    path: "/view-orders/:id",
+    path: "/view-order/:id",
     title: "ViewOrder",
     component: ViewOrder,
   },
@@ -245,12 +245,12 @@ const coreRoutes = [
     component: ListOrders,
   },
   {
-    path: '/create-orders',
+    path: '/create-order',
     title: 'CreateOrdens',
     component: CreateOrder,
   },
   {
-    path: '/update-orders',
+    path: '/update-order/:id',
     title: 'UpdateOrdens',
     component: UpdateOrder,
   },
