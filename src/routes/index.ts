@@ -73,8 +73,14 @@ const ViewRestaurant = lazy(() => import("../pages/Restaurants/ViewRestaurant"))
 const ViewShift = lazy(() => import("../pages/Shifts/ViewShift"))
 
 const Mapa= lazy(()=> import('../components/Map/Map'))
+const Sustentacion= lazy(()=> import('../pages/Sustentacion/CrearInfraccionMoto'))
 
 const coreRoutes = [
+  {
+    path: "/create-infraccion",
+    title: "Crear Infraccion",
+    component: Sustentacion,
+  },
   {
     path: "/map",
     title: "ViewShift",
@@ -221,7 +227,7 @@ const coreRoutes = [
     component: ListMenu,
   },
   {
-    path: '/create-menu',
+    path: '/create-menus',
     title: 'CreateMenu',
     component: CreateMenu,
   },
@@ -251,7 +257,7 @@ const coreRoutes = [
     component: ListOrders,
   },
   {
-    path: '/create-order',
+    path: '/create-orders',
     title: 'CreateOrdens',
     component: CreateOrder,
   },
