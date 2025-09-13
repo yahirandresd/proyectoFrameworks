@@ -12,6 +12,7 @@ import DefaultLayoutNoAuth from './layout/DefaultLayoutNoAuth';
 import MapTracker from './pages/Map/PageMap';
 import ChartsDashboard from './components/ChartDashboard';
 import NewOrderAlert from './components/NewOrderAlert';
+import MenuSearch from './components/Search';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/auth/signin" element={<SignIn />} />
           <Route path="/auth/signup" element={<SignUp />} />
           <Route index element={<ECommerce />} />
+          <Route path="/buscar" element={<MenuSearch />} />
         </Route>
 
         <Route element={<ProtectedRoute />}>

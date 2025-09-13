@@ -26,7 +26,7 @@ const ListUsers: React.FC = () => {
 
   const handleAction = async (action: string, item: User) => {
     if (action === "edit") {
-      navigate(`/users/edit/${item.id}`);
+      navigate(`/update-user/${item.id}`);
     } else if (action === "delete") {
       if (window.confirm(`Delete user ${item.name}?`)) {
         try {

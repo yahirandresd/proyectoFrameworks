@@ -63,7 +63,7 @@ const ListIssues: React.FC = () => {
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold text-gray-700 dark:text-white">Lista de Asuntos</h2>
         <button
-          onClick={() => navigate("/create-issue")}
+          onClick={() => navigate("/create-issues")}
           className="flex items-center bg-amarilloCanario hover:bg-yellow-500 text-white px-4 py-2 rounded shadow-sm transition duration-150 dark:bg-amarilloCanario dark:hover:bg-yellow-600"
         >
            Crear Ausunto
