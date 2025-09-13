@@ -13,7 +13,7 @@ import 'leaflet/dist/leaflet.css';
 
 const motorcycleIcon = new L.Icon({
   iconUrl:
-    'https://png.pngtree.com/recommend-works/png-clipart/20250101/ourmid/pngtree-orange-delivery-man-on-motorcycle-png-image_15017922.png',
+    'urldeimagendelicono',
   iconSize: [52, 52],
 });
 
